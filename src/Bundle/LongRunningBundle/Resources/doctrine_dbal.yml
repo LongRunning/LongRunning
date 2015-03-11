@@ -1,0 +1,8 @@
+services:
+    long_running.doctrine_dbal.close_connections:
+        class: LongRunning\Plugin\DoctrineDBALPlugin\CloseConnections
+        public: false
+        arguments:
+            - @doctrine
+        tags:
+            - { name: long_running.cleaner }

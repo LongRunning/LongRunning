@@ -1,0 +1,7 @@
+services:
+    long_running.simple_bus_rabbit_mq.when_message_consumed_or_failed_clean_up:
+        class: LongRunning\Plugin\SimpleBusRabbitMQPlugin\WhenMessageConsumedOrFailedCleanUp
+        arguments:
+            - @long_running.delegating_cleaner
+        tags:
+            - { name: kernel.event_subscriber }

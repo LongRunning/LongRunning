@@ -1,0 +1,27 @@
+{
+    "name": "long-running/long-running",
+    "type": "library",
+    "description": "Tools for working with long-running processes",
+    "homepage": "http://github.com/LongRunning/LongRunning",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Noback",
+            "email": "matthiasnoback@gmail.com",
+            "homepage": "http://php-and-symfony.matthiasnoback.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "doctrine/orm": "~2.3",
+        "simple-bus/rabbitmq-bundle": "dev-master",
+        "symfony/framework-bundle": "~2.3"
+    },
+    "autoload": {
+        "psr-4" : { "LongRunning\\" : "src/" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
