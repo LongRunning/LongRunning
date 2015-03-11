@@ -4,6 +4,7 @@ services:
         public: false
         arguments:
             - @doctrine
+            - @logger
         tags:
             - { name: long_running.cleaner }
 
@@ -12,5 +13,6 @@ services:
         public: false
         arguments:
             - @doctrine
+            - @logger
         tags:
             - { name: long_running.cleaner }

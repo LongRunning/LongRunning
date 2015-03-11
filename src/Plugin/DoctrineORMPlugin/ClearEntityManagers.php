@@ -4,6 +4,7 @@ namespace LongRunning\Plugin\DoctrineORMPlugin;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use LongRunning\Core\Cleaner;
+use Psr\Log\LoggerInterface;
 
 class ClearEntityManagers implements Cleaner
 {
@@ -12,14 +13,21 @@ class ClearEntityManagers implements Cleaner
      */
     private $managerRegistry;
 
-    public function __construct(ManagerRegistry $managerRegistry)
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(ManagerRegistry $managerRegistry, LoggerInterface $logger)
     {
         $this->managerRegistry = $managerRegistry;
+        $this->logger = $logger;
     }
 
     public function cleanUp()
     {
-        foreach ($this->managerRegistry->getManagers() as $manager) {
+        foreach ($this->managerRegistry->getManagers() as $name => $manager) {
+            $this->logger->debug('Clear EntityManager', ['entity_manager' => $name]);
             $manager->clear();
         }
     }

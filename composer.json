@@ -17,7 +17,8 @@
     "require-dev": {
         "doctrine/orm": "~2.3",
         "simple-bus/rabbitmq-bundle": "dev-master",
-        "symfony/framework-bundle": "~2.3"
+        "symfony/framework-bundle": "~2.3",
+        "monolog/monolog-bundle": "~2.3"
     },
     "autoload": {
         "psr-4" : { "LongRunning\\" : "src/" }
