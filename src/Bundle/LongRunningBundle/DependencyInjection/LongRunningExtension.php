@@ -39,6 +39,10 @@ class LongRunningExtension extends ConfigurableExtension implements PrependExten
             $loader->load('monolog.yml');
         }
 
+        if ($mergedConfig['swift_mailer']['enabled']) {
+            $loader->load('swift_mailer.yml');
+        }
+
         if ($mergedConfig['simple_bus_rabbit_mq']['enabled']) {
             $loader->load('simple_bus_rabbit_mq.yml');
         }
