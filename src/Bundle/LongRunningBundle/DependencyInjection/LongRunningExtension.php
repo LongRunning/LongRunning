@@ -35,6 +35,10 @@ class LongRunningExtension extends ConfigurableExtension implements PrependExten
             $loader->load('doctrine_dbal.yml');
         }
 
+        if ($mergedConfig['monolog']['enabled']) {
+            $loader->load('monolog.yml');
+        }
+
         if ($mergedConfig['simple_bus_rabbit_mq']['enabled']) {
             $loader->load('simple_bus_rabbit_mq.yml');
         }
