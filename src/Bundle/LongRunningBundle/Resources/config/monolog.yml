@@ -1,0 +1,20 @@
+services:
+    long_running.monolog.clear_fingers_crossed_handlers:
+        class: LongRunning\Plugin\MonologPlugin\ClearFingersCrossedHandlers
+        public: false
+        arguments:
+            # will be populated by MonologCleanersPass
+            - []
+            - @logger
+        tags:
+            - { name: long_running.cleaner }
+
+    long_running.monolog.close_buffer_handlers:
+        class: LongRunning\Plugin\MonologPlugin\CloseBufferHandlers
+        public: false
+        arguments:
+            # will be populated by MonologCleanersPass
+            - []
+            - @logger
+        tags:
+            - { name: long_running.cleaner }

@@ -2,6 +2,7 @@
 
 namespace LongRunning\Bundle\LongRunningBundle;
 
+use LongRunning\Bundle\LongRunningBundle\DependencyInjection\Compiler\MonologCleanersPass;
 use LongRunning\Bundle\LongRunningBundle\DependencyInjection\Compiler\RegisterCleanersPass;
 use LongRunning\Bundle\LongRunningBundle\DependencyInjection\LongRunningExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -16,6 +17,7 @@ class LongRunningBundle extends Bundle
 
     public function build(ContainerBuilder $container)
     {
+        $container->addCompilerPass(new MonologCleanersPass());
         $container->addCompilerPass(new RegisterCleanersPass());
     }
 }
