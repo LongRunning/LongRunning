@@ -28,11 +28,11 @@ class SwiftMailerPass implements CompilerPassInterface
                 $transport = sprintf('swiftmailer.mailer.%s.transport', $name);
                 $transportDefinition = $container->findDefinition($transport);
 
-                if (is_a('Swift_Transport_SpoolTransport', $transportDefinition->getClass(), true)) {
+                if (is_a($transportDefinition->getClass(), 'Swift_Transport_SpoolTransport', true)) {
                     $spool = sprintf('swiftmailer.mailer.%s.spool', $name);
                     $spoolDefinition = $container->findDefinition($spool);
 
-                    if (is_a('Swift_MemorySpool', $spoolDefinition->getClass(), true)) {
+                    if (is_a($spoolDefinition->getClass(), 'Swift_MemorySpool', true)) {
                         $realTransport = sprintf('swiftmailer.mailer.%s.transport.real', $name);
                         $spoolServiceReferences[$name] = new Reference($spool);
                         $realTransportServiceReferences[$name] = new Reference($realTransport);
