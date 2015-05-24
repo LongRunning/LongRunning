@@ -14,5 +14,5 @@ In a Symfony application enable the bundle `LongRunning\Bundle\LongRunningBundle
 - Close all Monolog buffer handlers (clears log messages that were buffered during the execution of a task)
 - Flush all Swift Mailer "in memory" spools (i.e. send spooled e-mails)
 
-If you also use the SimpleBusRabbitMQBundle, these clean-up actions will be performed automatically after each
+If you also use the SimpleBusRabbitMQBundleBridgeBundle, these clean-up actions will be performed automatically after each
 message that was consumed, whether or not consuming it was successful.
