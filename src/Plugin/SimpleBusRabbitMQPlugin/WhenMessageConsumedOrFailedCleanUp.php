@@ -3,7 +3,7 @@
 namespace LongRunning\Plugin\SimpleBusRabbitMQPlugin;
 
 use LongRunning\Core\Cleaner;
-use SimpleBus\RabbitMQBundle\Event\Events;
+use SimpleBus\RabbitMQBundleBridge\Event\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class WhenMessageConsumedOrFailedCleanUp implements EventSubscriberInterface
