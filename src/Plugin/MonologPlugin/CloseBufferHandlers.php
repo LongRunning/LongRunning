@@ -22,7 +22,7 @@ class CloseBufferHandlers implements Cleaner
      * @param BufferHandler[] $handlers
      * @param LoggerInterface $logger
      */
-    public function __construct($handlers, LoggerInterface $logger)
+    public function __construct(array $handlers, LoggerInterface $logger)
     {
         $this->handlers = $handlers;
         $this->logger = $logger;
