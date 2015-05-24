@@ -29,7 +29,7 @@ class ResetClosedEntityManagers implements Cleaner
     {
         foreach ($this->managerRegistry->getManagers() as $name => $manager) {
             if (!($manager instanceof EntityManager)) {
-                throw new \LogicException('Expected only instances of EntityManager');
+                continue;
             }
 
             if (!$manager->isOpen()) {
