@@ -16,10 +16,11 @@
     },
     "require-dev": {
         "doctrine/orm": "~2.3",
-        "symfony/monolog-bundle": "~2.3",
         "phpunit/phpunit": "~4.0",
         "simple-bus/rabbitmq-bundle-bridge": "~2.1",
-        "symfony/framework-bundle": "~2.3"
+        "symfony/framework-bundle": "~2.3",
+        "symfony/monolog-bundle": "~2.3",
+        "symfony/swiftmailer-bundle": "~2.3"
     },
     "autoload": {
         "psr-4" : { "LongRunning\\" : "src/" }

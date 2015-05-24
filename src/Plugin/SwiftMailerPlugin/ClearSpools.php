@@ -22,7 +22,7 @@ class ClearSpools implements Cleaner
      */
     private $logger;
 
-    public function __construct($spools, $transports, LoggerInterface $logger)
+    public function __construct(array $spools, array $transports, LoggerInterface $logger)
     {
         $this->spools = $spools;
         $this->transports = $transports;
