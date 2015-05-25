@@ -15,7 +15,7 @@ class SwiftMailerPass implements CompilerPassInterface
             return;
         }
 
-        if ($container->findDefinition('swiftmailer.mailer') === null || $container->getParameter('swiftmailer.mailers') === []) {
+        if (!$container->hasAlias('swiftmailer.mailer') || $container->getParameter('swiftmailer.mailers') === []) {
             return;
         }
 
