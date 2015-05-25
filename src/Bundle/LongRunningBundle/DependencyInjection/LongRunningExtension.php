@@ -72,7 +72,7 @@ class LongRunningExtension extends ConfigurableExtension implements PrependExten
                 ]
             ]);
         }
-        if (isset($enabledBundles['SimpleBusRabbitMQBundle'])) {
+        if (isset($enabledBundles['SimpleBusRabbitMQBundleBridgeBundle'])) {
             $container->prependExtensionConfig($this->getAlias(), [
                 'simple_bus_rabbit_mq' => [
                     'enabled' => true
