@@ -72,6 +72,23 @@ class LongRunningExtension extends ConfigurableExtension implements PrependExten
                 ]
             ]);
         }
+
+        if (isset($enabledBundles['MonologBundle'])) {
+            $container->prependExtensionConfig($this->getAlias(), [
+                'monolog' => [
+                    'enabled' => true
+                ]
+            ]);
+        }
+
+        if (isset($enabledBundles['SwiftmailerBundle'])) {
+            $container->prependExtensionConfig($this->getAlias(), [
+                'swift_mailer' => [
+                    'enabled' => true
+                ]
+            ]);
+        }
+
         if (isset($enabledBundles['SimpleBusRabbitMQBundleBridgeBundle'])) {
             $container->prependExtensionConfig($this->getAlias(), [
                 'simple_bus_rabbit_mq' => [
