@@ -2,9 +2,16 @@ parameters:
     kernel.secret: secret
     log_file: %kernel.logs_dir%/test.log
 
+services:
+    native_object_serializer:
+        class: SimpleBus\Serialization\NativeObjectSerializer
+
 doctrine:
     dbal:
         driver: pdo_sqlite
         path: :memory:
         memory: true
     orm: ~
+
+simple_bus_asynchronous:
+    object_serializer_service_id: native_object_serializer
