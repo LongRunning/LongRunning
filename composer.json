@@ -18,6 +18,7 @@
         "doctrine/doctrine-bundle": "~1.0",
         "doctrine/orm": "~2.3",
         "phpunit/phpunit": "~4.0",
+        "satooshi/php-coveralls": "~0.6",
         "simple-bus/rabbitmq-bundle-bridge": "~2.1",
         "symfony/form": "~2.3",
         "symfony/framework-bundle": "~2.3",
