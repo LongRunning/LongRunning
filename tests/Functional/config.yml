@@ -1,0 +1,10 @@
+parameters:
+    kernel.secret: secret
+    log_file: %kernel.logs_dir%/test.log
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: :memory:
+        memory: true
+    orm: ~

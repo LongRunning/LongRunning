@@ -15,6 +15,7 @@
         "php": ">=5.4"
     },
     "require-dev": {
+        "doctrine/doctrine-bundle": "~1.0",
         "doctrine/orm": "~2.3",
         "phpunit/phpunit": "~4.0",
         "simple-bus/rabbitmq-bundle-bridge": "~2.1",
@@ -24,6 +25,9 @@
     },
     "autoload": {
         "psr-4" : { "LongRunning\\" : "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "LongRunning\\Tests\\": "tests" }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

@@ -1,4 +1,5 @@
 /build/
+/tests/Functional/temp
 composer.lock
 phpunit.xml
 vendor/
