@@ -14,9 +14,11 @@ class MonologCleanersPass implements CompilerPassInterface
         if ($container->has($fingersCrossedHandlersId)) {
             $fingersCrossedServiceReferences = [];
             foreach ($container->getDefinitions() as $serviceId => $definition) {
-                $class = $container->getParameterBag()->resolveValue($definition->getClass());
-                if (is_a($class, 'Monolog\Handler\FingersCrossedHandler', true)) {
-                    $fingersCrossedServiceReferences[] = new Reference($serviceId);
+                if (strpos($serviceId, 'monolog.handler.') === 0) {
+                    $class = $container->getParameterBag()->resolveValue($definition->getClass());
+                    if (is_a($class, 'Monolog\Handler\FingersCrossedHandler', true)) {
+                        $fingersCrossedServiceReferences[] = new Reference($serviceId);
+                    }
                 }
             }
 
@@ -28,9 +30,11 @@ class MonologCleanersPass implements CompilerPassInterface
         if ($container->has($bufferHandlersId)) {
             $bufferHandlerServiceReferences = [];
             foreach ($container->getDefinitions() as $serviceId => $definition) {
-                $class = $container->getParameterBag()->resolveValue($definition->getClass());
-                if (is_a($class, 'Monolog\Handler\BufferHandler', true)) {
-                    $bufferHandlerServiceReferences[] = new Reference($serviceId);
+                if (strpos($serviceId, 'monolog.handler.') === 0) {
+                    $class = $container->getParameterBag()->resolveValue($definition->getClass());
+                    if (is_a($class, 'Monolog\Handler\BufferHandler', true)) {
+                        $bufferHandlerServiceReferences[] = new Reference($serviceId);
+                    }
                 }
             }
 

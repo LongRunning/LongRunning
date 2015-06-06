@@ -33,13 +33,13 @@ class MonologCleanersPassFingersCrossedTest extends \PHPUnit_Framework_TestCase
      */
     public function it_gets_fingers_crossed_handlers()
     {
-        $this->createFingersCrossedHandler('fingers.handler1');
-        $this->createFingersCrossedHandler('fingers.handler2');
-        $this->createFingersCrossedHandler('fingers.handler3');
+        $this->createFingersCrossedHandler('monolog.handler.handler1');
+        $this->createFingersCrossedHandler('monolog.handler.handler2');
+        $this->createFingersCrossedHandler('monolog.handler.handler3');
 
         $this->container->compile();
 
-        $this->resolverContainsFingersCrossedHandlers(array('fingers.handler1', 'fingers.handler2', 'fingers.handler3'));
+        $this->resolverContainsFingersCrossedHandlers(array('monolog.handler.handler1', 'monolog.handler.handler2', 'monolog.handler.handler3'));
     }
 
     private function createFingersCrossedHandler($name)

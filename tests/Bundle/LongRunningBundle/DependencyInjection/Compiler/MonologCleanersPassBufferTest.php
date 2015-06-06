@@ -33,13 +33,13 @@ class MonologCleanersPassBufferTest extends \PHPUnit_Framework_TestCase
      */
     public function it_gets_close_buffer_handlers()
     {
-        $this->createBufferHandler('buffer.handler1');
-        $this->createBufferHandler('buffer.handler2');
-        $this->createBufferHandler('buffer.handler3');
+        $this->createBufferHandler('monolog.handler.handler1');
+        $this->createBufferHandler('monolog.handler.handler2');
+        $this->createBufferHandler('monolog.handler.handler3');
 
         $this->container->compile();
 
-        $this->resolverContainsBufferHandler(array('buffer.handler1', 'buffer.handler2', 'buffer.handler3'));
+        $this->resolverContainsBufferHandler(array('monolog.handler.handler1', 'monolog.handler.handler2', 'monolog.handler.handler3'));
     }
 
     private function createBufferHandler($name)
