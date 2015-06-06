@@ -15,3 +15,19 @@ doctrine:
 
 simple_bus_asynchronous:
     object_serializer_service_id: native_object_serializer
+
+monolog:
+    handlers:
+        fingers_crossed:
+            type:           fingers_crossed
+            action_level:   warning
+            handler:        fingers_crossed_test
+        fingers_crossed_test:
+            type:           test
+            level:          debug
+        buffer:
+            type:           buffer
+            handler:        buffer_test
+        buffer_test:
+            type:           test
+            level:          debug
