@@ -27,6 +27,10 @@ class LongRunningExtension extends ConfigurableExtension implements PrependExten
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
+        if ($mergedConfig['bernard']['enabled']) {
+            $loader->load('bernard.yml');
+        }
+
         if ($mergedConfig['doctrine_orm']['enabled']) {
             $loader->load('doctrine_orm.yml');
         }
@@ -61,6 +65,14 @@ class LongRunningExtension extends ConfigurableExtension implements PrependExten
     public function prepend(ContainerBuilder $container)
     {
         $enabledBundles = $container->getParameter('kernel.bundles');
+
+        if (isset($enabledBundles['BernardBundle'])) {
+            $container->prependExtensionConfig($this->getAlias(), [
+                'bernard' => [
+                    'enabled' => true
+                ],
+            ]);
+        }
 
         if (isset($enabledBundles['DoctrineBundle'])) {
             $container->prependExtensionConfig($this->getAlias(), [
