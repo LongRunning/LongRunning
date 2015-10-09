@@ -19,6 +19,9 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root($this->alias);
         $rootNode
             ->children()
+                ->arrayNode('bernard')
+                    ->canBeEnabled()
+                ->end()
                 ->arrayNode('doctrine_orm')
                     ->canBeEnabled()
                 ->end()
