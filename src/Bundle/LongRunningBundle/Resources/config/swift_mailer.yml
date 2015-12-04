@@ -6,6 +6,6 @@ services:
             # will be populated by SwiftMailerPass
             - []
             - []
-            - @logger
+            - '@logger'
         tags:
             - { name: long_running.cleaner }

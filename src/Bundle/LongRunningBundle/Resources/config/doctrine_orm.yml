@@ -3,8 +3,8 @@ services:
         class: LongRunning\Plugin\DoctrineORMPlugin\ClearEntityManagers
         public: false
         arguments:
-            - @doctrine
-            - @logger
+            - '@doctrine'
+            - '@logger'
         tags:
             - { name: long_running.cleaner }
 
@@ -12,7 +12,7 @@ services:
         class: LongRunning\Plugin\DoctrineORMPlugin\ResetClosedEntityManagers
         public: false
         arguments:
-            - @doctrine
-            - @logger
+            - '@doctrine'
+            - '@logger'
         tags:
             - { name: long_running.cleaner }

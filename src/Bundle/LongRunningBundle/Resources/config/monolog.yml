@@ -5,7 +5,7 @@ services:
         arguments:
             # will be populated by MonologCleanersPass
             - []
-            - @logger
+            - '@logger'
         tags:
             - { name: long_running.cleaner }
 
@@ -15,6 +15,6 @@ services:
         arguments:
             # will be populated by MonologCleanersPass
             - []
-            - @logger
+            - '@logger'
         tags:
             - { name: long_running.cleaner }

@@ -3,7 +3,7 @@ services:
         class: LongRunning\Plugin\DoctrineDBALPlugin\CloseConnections
         public: false
         arguments:
-            - @doctrine
-            - @logger
+            - '@doctrine'
+            - '@logger'
         tags:
             - { name: long_running.cleaner }
