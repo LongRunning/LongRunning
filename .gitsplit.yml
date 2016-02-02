@@ -1,0 +1,4 @@
+split:
+    src/Bundle/*: git@github.com:LongRunning/$i.git
+    src/Core/: git@github.com:LongRunning/Core.git
+    src/Plugin/*: git@github.com:LongRunning/$i.git
