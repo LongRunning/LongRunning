@@ -1,6 +1,6 @@
 <?php
 
-namespace LongRunning\Tests\Plugin\SimpleBusRabbitMQPlugin;
+namespace LongRunning\Plugin\SimpleBusRabbitMQPlugin\Tests;
 
 use LongRunning\Plugin\SimpleBusRabbitMQPlugin\WhenMessageConsumedOrFailedCleanUp;
 use SimpleBus\RabbitMQBundleBridge\Event\Events;

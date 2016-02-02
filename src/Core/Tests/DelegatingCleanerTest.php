@@ -1,6 +1,6 @@
 <?php
 
-namespace LongRunning\Tests\Core;
+namespace LongRunning\Core\Tests;
 
 use LongRunning\Core\Cleaner;
 use LongRunning\Core\DelegatingCleaner;

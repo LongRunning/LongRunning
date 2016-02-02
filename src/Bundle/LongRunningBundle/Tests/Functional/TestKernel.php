@@ -1,6 +1,6 @@
 <?php
 
-namespace LongRunning\Tests\Functional;
+namespace LongRunning\Bundle\LongRunningBundle\Tests\Functional;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use LongRunning\Bundle\LongRunningBundle\LongRunningBundle;

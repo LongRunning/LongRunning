@@ -1,6 +1,6 @@
 <?php
 
-namespace LongRunning\Tests\Plugin\DoctrineORMPlugin;
+namespace LongRunning\Plugin\DoctrineORMPlugin\Tests;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;

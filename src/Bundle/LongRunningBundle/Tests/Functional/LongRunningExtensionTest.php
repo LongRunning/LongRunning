@@ -1,6 +1,6 @@
 <?php
 
-namespace LongRunning\Tests\Functional;
+namespace LongRunning\Bundle\LongRunningBundle\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -8,7 +8,7 @@ class LongRunningExtensionTest extends KernelTestCase
 {
     protected static function getKernelClass()
     {
-        return 'LongRunning\Tests\Functional\TestKernel';
+        return 'LongRunning\Bundle\LongRunningBundle\Tests\Functional\TestKernel';
     }
 
     protected function setUp()

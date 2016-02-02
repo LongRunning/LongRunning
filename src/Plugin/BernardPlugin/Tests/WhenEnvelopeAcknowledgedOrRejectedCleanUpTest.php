@@ -1,6 +1,6 @@
 <?php
 
-namespace LongRunning\Tests\Plugin\BernardPlugin;
+namespace LongRunning\Plugin\BernardPlugin\Tests;
 
 use LongRunning\Plugin\BernardPlugin\WhenEnvelopeAcknowledgedOrRejectedCleanUp;
 use Symfony\Component\EventDispatcher\EventDispatcher;

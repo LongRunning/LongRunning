@@ -1,17 +1,18 @@
 <?php
 
-namespace LongRunning\Tests\Functional;
+namespace LongRunning\Bundle\LongRunningBundle\Tests\Functional;
 
 use LongRunning\Core\DelegatingCleaner;
+use Monolog\Handler\FingersCrossedHandler;
 use Monolog\Handler\TestHandler;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class MonologBufferTest extends KernelTestCase
+class MonologFingersCrossedTest extends KernelTestCase
 {
     protected static function getKernelClass()
     {
-        return 'LongRunning\Tests\Functional\TestKernel';
+        return 'LongRunning\Bundle\LongRunningBundle\Tests\Functional\TestKernel';
     }
 
     protected function setUp()
@@ -22,21 +23,25 @@ class MonologBufferTest extends KernelTestCase
     /**
      * @test
      */
-    public function it_keeps_messages_in_buffer_until_cleanp()
+    public function it_clears_messages_that_never_hit_the_action_level()
     {
-        $bufferTestHandler = $this->getTestHandler('buffer_test');
+        $bufferTestHandler = $this->getTestHandler('fingers_crossed_test');
         $logger = $this->getLogger();
 
-        $logger->debug('Buffer this message');
+        $logger->debug('This message will never show up');
         $this->assertMessages($bufferTestHandler->getRecords(), array());
 
         $this->getCleaner()->cleanUp();
 
-        $this->assertMessages($bufferTestHandler->getRecords(), array(
-            'Buffer this message',
-            'Clear EntityManager',
-            'Close database connection',
-            'Clear monolog fingers crossed handler',
+        $this->assertMessages($bufferTestHandler->getRecords(), array());
+
+        $fingersCrossedHandler = $this->getFingersCrossedHandler('fingers_crossed');
+        $reflectionObject = new \ReflectionObject($fingersCrossedHandler);
+        $property = $reflectionObject->getProperty('buffer');
+        $property->setAccessible(true);
+
+        $messages = $property->getValue($fingersCrossedHandler);
+        $this->assertMessages($messages, array(
             'Close monolog buffer handler',
         ));
     }
@@ -62,6 +67,15 @@ class MonologBufferTest extends KernelTestCase
      * @return TestHandler
      */
     private function getTestHandler($name)
+    {
+        return static::$kernel->getContainer()->get(sprintf('monolog.handler.%s', $name));
+    }
+
+    /**
+     * @param string $name
+     * @return FingersCrossedHandler
+     */
+    private function getFingersCrossedHandler($name)
     {
         return static::$kernel->getContainer()->get(sprintf('monolog.handler.%s', $name));
     }

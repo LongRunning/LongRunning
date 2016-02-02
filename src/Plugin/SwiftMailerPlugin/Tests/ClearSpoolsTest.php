@@ -1,6 +1,6 @@
 <?php
 
-namespace LongRunning\Tests\Plugin\SwiftMailerPlugin;
+namespace LongRunning\Plugin\SwiftMailerPlugin\Tests;
 
 use LongRunning\Plugin\SwiftMailerPlugin\ClearSpools;
 

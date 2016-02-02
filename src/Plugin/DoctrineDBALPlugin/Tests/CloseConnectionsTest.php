@@ -1,6 +1,6 @@
 <?php
 
-namespace LongRunning\Tests\Plugin\DoctrineDBALPlugin;
+namespace LongRunning\Plugin\DoctrineDBALPlugin\Tests;
 
 use Doctrine\DBAL\Connection;
 use LongRunning\Plugin\DoctrineDBALPlugin\CloseConnections;

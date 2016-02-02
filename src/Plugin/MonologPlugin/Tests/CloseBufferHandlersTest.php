@@ -1,6 +1,6 @@
 <?php
 
-namespace LongRunning\Tests\Plugin\MonologPlugin;
+namespace LongRunning\Plugin\MonologPlugin\Tests;
 
 use LongRunning\Plugin\MonologPlugin\CloseBufferHandlers;
 use Monolog\Handler\BufferHandler;

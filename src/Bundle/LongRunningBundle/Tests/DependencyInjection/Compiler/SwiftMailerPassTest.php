@@ -1,6 +1,6 @@
 <?php
 
-namespace LongRunning\Tests\Bundle\LongRunningBundle\DependencyInjection\Compiler;
+namespace LongRunning\Bundle\LongRunningBundle\Tests\DependencyInjection\Compiler;
 
 use LongRunning\Bundle\LongRunningBundle\DependencyInjection\Compiler\SwiftMailerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
