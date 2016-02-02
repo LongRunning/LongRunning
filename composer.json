@@ -24,11 +24,18 @@
         "symfony/monolog-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3"
     },
+    "replace": {
+        "long-running/bundle": "self.version",
+        "long-running/core": "self.version",
+        "long-running/plugin-bernard": "self.version",
+        "long-running/plugin-doctrine-dbal": "self.version",
+        "long-running/plugin-doctrine-orm": "self.version",
+        "long-running/plugin-monolog": "self.version",
+        "long-running/plugin-simplebus-rabbitmqp": "self.version",
+        "long-running/plugin-swiftmailer": "self.version"
+    },
     "autoload": {
         "psr-4" : { "LongRunning\\" : "src/" }
-    },
-    "autoload-dev": {
-        "psr-4": { "LongRunning\\Tests\\": "tests" }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

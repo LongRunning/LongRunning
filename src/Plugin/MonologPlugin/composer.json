@@ -1,0 +1,23 @@
+{
+    "name": "long-running/plugin-monolog",
+    "type": "library",
+    "description": "Tools for working with long-running processes",
+    "homepage": "http://github.com/LongRunning/LongRunning",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Noback",
+            "email": "matthiasnoback@gmail.com",
+            "homepage": "http://php-and-symfony.matthiasnoback.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "long-running/core": "^1.0"
+    },
+    "autoload": {
+        "psr-4" : { "LongRunning\\Plugin\\MonologPlugin\\" : "./" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
