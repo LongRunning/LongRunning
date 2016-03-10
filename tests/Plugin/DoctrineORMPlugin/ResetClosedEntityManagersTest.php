@@ -4,6 +4,7 @@ namespace LongRunning\Tests\Plugin\DoctrineORMPlugin;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use LongRunning\Plugin\DoctrineORMPlugin\ResetClosedEntityManagers;
 
 class ResetClosedEntityManagersTest extends \PHPUnit_Framework_TestCase
@@ -14,8 +15,43 @@ class ResetClosedEntityManagersTest extends \PHPUnit_Framework_TestCase
     public function it_resets_entity_managers()
     {
         $managers = [
-            'default'   => $this->getEntityManager(),
-            'second'    => $this->getEntityManager(),
+            'default'   => $this->getEntityManager('Doctrine\ORM\EntityManager'),
+            'second'    => $this->getEntityManager('Doctrine\ORM\EntityManager'),
+        ];
+
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry
+            ->expects($this->once())
+            ->method('getManagers')
+            ->willReturn($managers);
+
+        foreach (array_keys($managers) as $count => $name) {
+            $registry
+                ->expects($this->at($count + 1))
+                ->method('resetManager')
+                ->with($name);
+        }
+
+        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        foreach (array_keys($managers) as $count => $name) {
+            $logger
+                ->expects($this->at($count))
+                ->method('debug')
+                ->with('Reset closed EntityManager', ['entity_manager' => $name]);
+        }
+
+        $cleaner = new ResetClosedEntityManagers($registry, $logger);
+        $cleaner->cleanUp();
+    }
+
+    /**
+     * @test
+     */
+    public function it_resets_entity_manager_interfase()
+    {
+        $managers = [
+            'default'   => $this->getEntityManager('Doctrine\ORM\EntityManagerInterface'),
+            'second'    => $this->getEntityManager('Doctrine\ORM\EntityManagerInterface'),
         ];
 
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
@@ -67,13 +103,14 @@ class ResetClosedEntityManagersTest extends \PHPUnit_Framework_TestCase
         $cleaner->cleanUp();
     }
 
-
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|EntityManager
+     * @param string $entityManagerClass
+     *
+     * @return EntityManager|EntityManagerInterface|\PHPUnit_Framework_MockObject_MockObject
      */
-    private function getEntityManager()
+    private function getEntityManager($entityManagerClass)
     {
-        $manager = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $manager = $this->getMockBuilder($entityManagerClass)
             ->disableOriginalConstructor()
             ->getMock();
 
