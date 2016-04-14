@@ -31,6 +31,9 @@ class ClearSpools implements Cleaner
 
     public function cleanUp()
     {
+        foreach ($this->transports as $transport) {
+            $transport->start();
+        }
         foreach ($this->spools as $name => $spool) {
             try {
                 $this->logger->debug('Flush swiftmailer memory spool');
@@ -38,6 +41,9 @@ class ClearSpools implements Cleaner
             } catch (\Swift_TransportException $exception) {
                 $this->logger->error(sprintf('Exception occurred while flushing email queue: %s', $exception->getMessage()));
             }
+        }
+        foreach ($this->transports as $transport) {
+            $transport->stop();
         }
     }
 }
