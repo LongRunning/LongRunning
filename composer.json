@@ -6,6 +6,10 @@
     "license": "MIT",
     "authors": [
         {
+            "name": "Cliff Odijk",
+            "email": "cliff@jcid.nl"
+        },
+        {
             "name": "Matthias Noback",
             "email": "matthiasnoback@gmail.com",
             "homepage": "http://php-and-symfony.matthiasnoback.nl"
@@ -25,10 +29,14 @@
         "symfony/swiftmailer-bundle": "~2.3"
     },
     "autoload": {
-        "psr-4" : { "LongRunning\\" : "src/" }
+        "psr-4": {
+            "LongRunning\\": "src/"
+        }
     },
     "autoload-dev": {
-        "psr-4": { "LongRunning\\Tests\\": "tests" }
+        "psr-4": {
+            "LongRunning\\Tests\\": "tests"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
