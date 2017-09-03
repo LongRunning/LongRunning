@@ -6,7 +6,7 @@ use LongRunning\Bundle\LongRunningBundle\DependencyInjection\Compiler\RegisterCl
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class RegisterCleanersPassTest extends \PHPUnit_Framework_TestCase
+class RegisterCleanersPassTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ContainerBuilder

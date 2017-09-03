@@ -6,7 +6,7 @@ use LongRunning\Bundle\LongRunningBundle\DependencyInjection\Compiler\SwiftMaile
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class SwiftMailerPassTest extends \PHPUnit_Framework_TestCase
+class SwiftMailerPassTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ContainerBuilder

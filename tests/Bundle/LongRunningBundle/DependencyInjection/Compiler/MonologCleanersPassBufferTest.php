@@ -6,7 +6,7 @@ use LongRunning\Bundle\LongRunningBundle\DependencyInjection\Compiler\MonologCle
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class MonologCleanersPassBufferTest extends \PHPUnit_Framework_TestCase
+class MonologCleanersPassBufferTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ContainerBuilder

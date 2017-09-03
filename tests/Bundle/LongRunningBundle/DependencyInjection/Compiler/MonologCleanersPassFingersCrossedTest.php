@@ -6,7 +6,7 @@ use LongRunning\Bundle\LongRunningBundle\DependencyInjection\Compiler\MonologCle
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class MonologCleanersPassFingersCrossedTest extends \PHPUnit_Framework_TestCase
+class MonologCleanersPassFingersCrossedTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ContainerBuilder

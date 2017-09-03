@@ -5,7 +5,7 @@ namespace LongRunning\Tests\Plugin\MonologPlugin;
 use LongRunning\Plugin\MonologPlugin\ClearFingersCrossedHandlers;
 use Monolog\Handler\FingersCrossedHandler;
 
-class ClearFingersCrossedHandlersTest extends \PHPUnit_Framework_TestCase
+class ClearFingersCrossedHandlersTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -17,7 +17,7 @@ class ClearFingersCrossedHandlersTest extends \PHPUnit_Framework_TestCase
             $this->getHandler(),
         ];
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger
             ->expects($this->exactly(count($handlers)))
             ->method('debug')

@@ -6,14 +6,14 @@ use LongRunning\Plugin\SimpleBusRabbitMQPlugin\WhenMessageConsumedOrFailedCleanU
 use SimpleBus\RabbitMQBundleBridge\Event\Events;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class WhenMessageConsumedOrFailedCleanUpTest extends \PHPUnit_Framework_TestCase
+class WhenMessageConsumedOrFailedCleanUpTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
      */
     public function it_tests_that_we_cleanup_after_consumed()
     {
-        $delegatedCleaner = $this->getMock('LongRunning\Core\Cleaner');
+        $delegatedCleaner = $this->createMock('LongRunning\Core\Cleaner');
         $delegatedCleaner
             ->expects($this->once())
             ->method('cleanUp');
@@ -30,7 +30,7 @@ class WhenMessageConsumedOrFailedCleanUpTest extends \PHPUnit_Framework_TestCase
      */
     public function it_tests_that_we_cleanup_after_consumption_failed()
     {
-        $delegatedCleaner = $this->getMock('LongRunning\Core\Cleaner');
+        $delegatedCleaner = $this->createMock('LongRunning\Core\Cleaner');
         $delegatedCleaner
             ->expects($this->once())
             ->method('cleanUp');
@@ -47,7 +47,7 @@ class WhenMessageConsumedOrFailedCleanUpTest extends \PHPUnit_Framework_TestCase
      */
     public function it_tests_that_we_dont_cleanup_after_other_events()
     {
-        $delegatedCleaner = $this->getMock('LongRunning\Core\Cleaner');
+        $delegatedCleaner = $this->createMock('LongRunning\Core\Cleaner');
         $delegatedCleaner
             ->expects($this->never())
             ->method('cleanUp');
