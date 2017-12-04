@@ -36,7 +36,5 @@
         "psr-4": {
             "LongRunning\\Tests\\": "tests"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
