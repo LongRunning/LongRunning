@@ -19,7 +19,7 @@ class LongRunningExtensionTest extends KernelTestCase
     /**
      * @test
      */
-    public function it_automaticly_enables_plugins()
+    public function it_automatically_enables_plugins()
     {
         $cleaner = static::$kernel->getContainer()->get('long_running.delegating_cleaner');
 
@@ -36,6 +36,7 @@ class LongRunningExtensionTest extends KernelTestCase
             'LongRunning\Plugin\MonologPlugin\ClearFingersCrossedHandlers',
             'LongRunning\Plugin\MonologPlugin\CloseBufferHandlers',
             'LongRunning\Plugin\SwiftMailerPlugin\ClearSpools',
+            'LongRunning\Plugin\SentryPlugin\ClearSentryErrors',
         ];
 
         $this->assertEquals($expectedCleaners, array_map('get_class', $cleaners));

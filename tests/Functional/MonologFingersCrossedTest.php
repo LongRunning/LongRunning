@@ -43,6 +43,7 @@ class MonologFingersCrossedTest extends KernelTestCase
         $messages = $property->getValue($fingersCrossedHandler);
         $this->assertMessages($messages, array(
             'Close monolog buffer handler',
+            'Flush sentry errors',
         ));
     }
 

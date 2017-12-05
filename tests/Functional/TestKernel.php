@@ -5,8 +5,10 @@ namespace LongRunning\Tests\Functional;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use LongRunning\Bundle\LongRunningBundle\LongRunningBundle;
 use OldSound\RabbitMqBundle\OldSoundRabbitMqBundle;
+use Sentry\SentryBundle\SentryBundle;
 use SimpleBus\AsynchronousBundle\SimpleBusAsynchronousBundle;
 use SimpleBus\RabbitMQBundleBridge\SimpleBusRabbitMQBundleBridgeBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -31,7 +33,9 @@ class TestKernel extends Kernel
             new SimpleBusAsynchronousBundle(),
             new SimpleBusRabbitMQBundleBridgeBundle(),
             new SwiftmailerBundle(),
+            new SentryBundle(),
             new LongRunningBundle(),
+            new FrameworkBundle()
         ];
     }
 
