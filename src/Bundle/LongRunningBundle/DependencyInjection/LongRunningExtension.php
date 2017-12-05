@@ -47,6 +47,10 @@ class LongRunningExtension extends ConfigurableExtension implements PrependExten
             $loader->load('swift_mailer.yml');
         }
 
+        if ($mergedConfig['sentry']['enabled']) {
+            $loader->load('sentry.yml');
+        }
+
         if ($mergedConfig['simple_bus_rabbit_mq']['enabled']) {
             $loader->load('simple_bus_rabbit_mq.yml');
         }
@@ -88,6 +92,15 @@ class LongRunningExtension extends ConfigurableExtension implements PrependExten
         if (isset($enabledBundles['MonologBundle'])) {
             $container->prependExtensionConfig($this->getAlias(), [
                 'monolog' => [
+                    'enabled' => true
+                ]
+            ]);
+        }
+
+
+        if (isset($enabledBundles['SentryBundle'])) {
+            $container->prependExtensionConfig($this->getAlias(), [
+                'sentry' => [
                     'enabled' => true
                 ]
             ]);

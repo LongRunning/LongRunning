@@ -25,7 +25,8 @@
         "simple-bus/rabbitmq-bundle-bridge": "~2.1",
         "symfony/framework-bundle": "~2.3 || ~3.0",
         "symfony/monolog-bundle": "~2.3",
-        "symfony/swiftmailer-bundle": "~2.3"
+        "symfony/swiftmailer-bundle": "~2.3",
+        "sentry/sentry-symfony": "~1.0"
     },
     "autoload": {
         "psr-4": {
