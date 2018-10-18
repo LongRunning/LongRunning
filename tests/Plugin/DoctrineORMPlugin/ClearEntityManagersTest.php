@@ -17,13 +17,13 @@ class ClearEntityManagersTest extends \PHPUnit_Framework_TestCase
             'second'    => $this->getManager(),
         ];
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry
             ->expects($this->once())
             ->method('getManagers')
             ->willReturn($managers);
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         foreach (array_keys($managers) as $count => $name) {
             $logger
                 ->expects($this->at($count))

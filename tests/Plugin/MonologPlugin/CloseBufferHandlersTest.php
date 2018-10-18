@@ -17,7 +17,7 @@ class CloseBufferHandlersTest extends \PHPUnit_Framework_TestCase
             $this->getHandler(),
         ];
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger
             ->expects($this->exactly(count($handlers)))
             ->method('debug')

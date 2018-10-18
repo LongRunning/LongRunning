@@ -12,7 +12,7 @@ class WhenEnvelopeAcknowledgedOrRejectedCleanUpTest extends \PHPUnit_Framework_T
      */
     public function it_tests_that_we_cleanup_after_envelope_acknowledge()
     {
-        $delegatedCleaner = $this->getMock('LongRunning\Core\Cleaner');
+        $delegatedCleaner = $this->createMock('LongRunning\Core\Cleaner');
         $delegatedCleaner
             ->expects($this->once())
             ->method('cleanUp');
@@ -29,7 +29,7 @@ class WhenEnvelopeAcknowledgedOrRejectedCleanUpTest extends \PHPUnit_Framework_T
      */
     public function it_tests_that_we_cleanup_after_envelope_rejected()
     {
-        $delegatedCleaner = $this->getMock('LongRunning\Core\Cleaner');
+        $delegatedCleaner = $this->createMock('LongRunning\Core\Cleaner');
         $delegatedCleaner
             ->expects($this->once())
             ->method('cleanUp');
@@ -46,7 +46,7 @@ class WhenEnvelopeAcknowledgedOrRejectedCleanUpTest extends \PHPUnit_Framework_T
      */
     public function it_tests_that_we_dont_cleanup_after_other_events()
     {
-        $delegatedCleaner = $this->getMock('LongRunning\Core\Cleaner');
+        $delegatedCleaner = $this->createMock('LongRunning\Core\Cleaner');
         $delegatedCleaner
             ->expects($this->never())
             ->method('cleanUp');

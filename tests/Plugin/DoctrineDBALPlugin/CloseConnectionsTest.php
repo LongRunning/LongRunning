@@ -17,13 +17,13 @@ class CloseConnectionsTest extends \PHPUnit_Framework_TestCase
             'second'    => $this->getConnection(),
         ];
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ConnectionRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ConnectionRegistry');
         $registry
             ->expects($this->once())
             ->method('getConnections')
             ->willReturn($connections);
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         foreach (array_keys($connections) as $count => $name) {
             $logger
                 ->expects($this->at($count))
@@ -43,7 +43,7 @@ class CloseConnectionsTest extends \PHPUnit_Framework_TestCase
      */
     public function it_throws_exception_with_wrong_connection()
     {
-        $registry = $this->getMock('Doctrine\Common\Persistence\ConnectionRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ConnectionRegistry');
         $registry
             ->expects($this->once())
             ->method('getConnections')
@@ -51,7 +51,7 @@ class CloseConnectionsTest extends \PHPUnit_Framework_TestCase
                 'default' => new \stdClass(),
             ]);
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
 
         $cleaner = new CloseConnections($registry, $logger);
         $cleaner->cleanUp();

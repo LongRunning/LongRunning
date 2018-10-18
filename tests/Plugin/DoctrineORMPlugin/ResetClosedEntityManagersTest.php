@@ -19,7 +19,7 @@ class ResetClosedEntityManagersTest extends \PHPUnit_Framework_TestCase
             'second'    => $this->getEntityManager('Doctrine\ORM\EntityManager'),
         ];
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry
             ->expects($this->once())
             ->method('getManagers')
@@ -32,7 +32,7 @@ class ResetClosedEntityManagersTest extends \PHPUnit_Framework_TestCase
                 ->with($name);
         }
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         foreach (array_keys($managers) as $count => $name) {
             $logger
                 ->expects($this->at($count))
@@ -54,7 +54,7 @@ class ResetClosedEntityManagersTest extends \PHPUnit_Framework_TestCase
             'second'    => $this->getEntityManager('Doctrine\ORM\EntityManagerInterface'),
         ];
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry
             ->expects($this->once())
             ->method('getManagers')
@@ -67,7 +67,7 @@ class ResetClosedEntityManagersTest extends \PHPUnit_Framework_TestCase
                 ->with($name);
         }
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         foreach (array_keys($managers) as $count => $name) {
             $logger
                 ->expects($this->at($count))
@@ -88,13 +88,13 @@ class ResetClosedEntityManagersTest extends \PHPUnit_Framework_TestCase
             'default'   => $this->getObjectManager(),
         ];
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry
             ->expects($this->once())
             ->method('getManagers')
             ->willReturn($managers);
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger
             ->expects($this->never())
             ->method('debug');
@@ -127,7 +127,7 @@ class ResetClosedEntityManagersTest extends \PHPUnit_Framework_TestCase
      */
     private function getObjectManager()
     {
-        $manager = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
+        $manager = $this->getMockBuilder('LongRunning\Plugin\EnqueuePlugin\ObjectManager')
             ->disableOriginalConstructor()
             ->getMock();
 

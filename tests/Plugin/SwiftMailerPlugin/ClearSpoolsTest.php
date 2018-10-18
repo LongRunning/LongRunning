@@ -21,7 +21,7 @@ class ClearSpoolsTest extends \PHPUnit_Framework_TestCase
             $spools[$name] = $this->getSpool($transport);
         }
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger
             ->expects($this->exactly(count($transports)))
             ->method('debug')
@@ -41,13 +41,13 @@ class ClearSpoolsTest extends \PHPUnit_Framework_TestCase
         ];
 
         $spools = [];
-        $spools['default'] = $spool = $this->getMock('Swift_MemorySpool');
+        $spools['default'] = $spool = $this->createMock('Swift_MemorySpool');
         $spool
             ->expects($this->once())
             ->method('flushQueue')
             ->willThrowException(new \Swift_TransportException('Fake error'));
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger
             ->expects($this->exactly(count($transports)))
             ->method('debug')
@@ -66,7 +66,7 @@ class ClearSpoolsTest extends \PHPUnit_Framework_TestCase
      */
     private function getTransport()
     {
-        return $this->getMock('Swift_Transport');
+        return $this->createMock('Swift_Transport');
     }
 
     /**
@@ -75,7 +75,7 @@ class ClearSpoolsTest extends \PHPUnit_Framework_TestCase
      */
     private function getSpool(\Swift_Transport $transport)
     {
-        $spool = $this->getMock('Swift_MemorySpool');
+        $spool = $this->createMock('Swift_MemorySpool');
         $spool
             ->expects($this->once())
             ->method('flushQueue')

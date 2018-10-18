@@ -12,7 +12,7 @@ class ClearSentryErrorsTest extends \PHPUnit_Framework_TestCase
      */
     public function it_test_if_handlers_get_cleared()
     {
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger
             ->expects($this->once())
             ->method('debug')

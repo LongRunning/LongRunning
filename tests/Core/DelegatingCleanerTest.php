@@ -25,7 +25,7 @@ class DelegatingCleanerTest extends \PHPUnit_Framework_TestCase
      */
     private function getCleaner()
     {
-        $cleaner = $this->getMock('LongRunning\Core\Cleaner');
+        $cleaner = $this->createMock('LongRunning\Core\Cleaner');
         $cleaner
             ->expects($this->once())
             ->method('cleanUp');
