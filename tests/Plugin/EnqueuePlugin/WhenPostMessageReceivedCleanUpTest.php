@@ -1,12 +1,13 @@
 <?php
 
-namespace LongRunning\Plugin\EnqueuePlugin;
+namespace LongRunning\Tests\Plugin\EnqueuePlugin;
 
 use Enqueue\Consumption\Context\PostMessageReceived;
 use Interop\Queue\Consumer;
 use Interop\Queue\Context;
 use Interop\Queue\Message;
 use LongRunning\Core\Cleaner;
+use LongRunning\Plugin\EnqueuePlugin\WhenPostMessageReceivedCleanUp;
 use Psr\Log\LoggerInterface;
 
 class WhenPostMessageReceivedCleanUpTest extends \PHPUnit_Framework_TestCase

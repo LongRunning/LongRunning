@@ -2,10 +2,10 @@
 
 namespace LongRunning\Tests\Plugin\DoctrineORMPlugin;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use LongRunning\Plugin\DoctrineORMPlugin\ResetClosedEntityManagers;
+use LongRunning\Tests\Plugin\EnqueuePlugin\ObjectManager;
 
 class ResetClosedEntityManagersTest extends \PHPUnit_Framework_TestCase
 {
@@ -127,7 +127,7 @@ class ResetClosedEntityManagersTest extends \PHPUnit_Framework_TestCase
      */
     private function getObjectManager()
     {
-        $manager = $this->getMockBuilder('LongRunning\Plugin\EnqueuePlugin\ObjectManager')
+        $manager = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
