@@ -46,6 +46,7 @@ class MonologCleanersPassFingersCrossedTest extends TestCase
     private function createFingersCrossedHandler($name)
     {
         $handler = new Definition('Monolog\Handler\FingersCrossedHandler', array(array()));
+        $handler->setPublic(true);
         $this->container->setDefinition($name, $handler);
     }
 

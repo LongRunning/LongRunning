@@ -56,6 +56,7 @@ class RegisterCleanersPassTest extends TestCase
     private function createCleaner($name)
     {
         $cleaner = new Definition('LongRunning\Core\Cleaner');
+        $cleaner->setPublic(true);
         $cleaner->addTag('long_running.cleaner');
         $this->container->setDefinition($name, $cleaner);
     }

@@ -4,6 +4,7 @@ namespace LongRunning\Tests\Functional;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use LongRunning\Bundle\LongRunningBundle\LongRunningBundle;
+use LongRunning\Tests\Functional\Compiler\PublicMonologHandlersCompilerPass;
 use OldSound\RabbitMqBundle\OldSoundRabbitMqBundle;
 use Sentry\SentryBundle\SentryBundle;
 use SimpleBus\AsynchronousBundle\SimpleBusAsynchronousBundle;
@@ -12,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 
 class TestKernel extends Kernel
@@ -22,6 +24,11 @@ class TestKernel extends Kernel
     {
         parent::__construct('test', true);
         $this->tempDir = __DIR__ . '/temp';
+    }
+
+    protected function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new PublicMonologHandlersCompilerPass());
     }
 
     public function registerBundles()

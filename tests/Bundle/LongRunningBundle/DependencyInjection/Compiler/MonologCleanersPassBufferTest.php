@@ -46,6 +46,7 @@ class MonologCleanersPassBufferTest extends TestCase
     private function createBufferHandler($name)
     {
         $handler = new Definition('Monolog\Handler\BufferHandler', array(array()));
+        $handler->setPublic(true);
         $this->container->setDefinition($name, $handler);
     }
 
