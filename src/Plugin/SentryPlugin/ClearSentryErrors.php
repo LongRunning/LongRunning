@@ -28,5 +28,6 @@ class ClearSentryErrors implements Cleaner
     {
         $this->logger->debug('Flush sentry errors');
         $this->sentry->sendUnsentErrors();
+        $this->sentry->breadcrumbs->reset();
     }
 }

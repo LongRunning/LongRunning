@@ -23,6 +23,11 @@ class ClearSentryErrorsTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('sendUnsentErrors');
 
+        $sentry
+            ->breadcrumbs
+            ->expects($this->once())
+            ->method('reset');
+
         $cleaner = new ClearSentryErrors($sentry,  $logger);
         $cleaner->cleanUp();
     }
@@ -32,7 +37,21 @@ class ClearSentryErrorsTest extends \PHPUnit_Framework_TestCase
      */
     private function getSentry()
     {
-        return $this->getMockBuilder('Sentry\SentryBundle\SentrySymfonyClient')
+        $sentry = $this->getMockBuilder('Sentry\SentryBundle\SentrySymfonyClient')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $sentry->breadcrumbs = $this->getBreadcrumbs();
+
+        return $sentry;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|Raven_Breadcrumbs
+     */
+    private function getBreadcrumbs()
+    {
+        return $this->getMockBuilder('Raven_Breadcrumbs')
             ->disableOriginalConstructor()
             ->getMock();
     }
