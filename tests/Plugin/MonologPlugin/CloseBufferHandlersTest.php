@@ -4,8 +4,9 @@ namespace LongRunning\Tests\Plugin\MonologPlugin;
 
 use LongRunning\Plugin\MonologPlugin\CloseBufferHandlers;
 use Monolog\Handler\BufferHandler;
+use PHPUnit\Framework\TestCase;
 
-class CloseBufferHandlersTest extends \PHPUnit_Framework_TestCase
+class CloseBufferHandlersTest extends TestCase
 {
     /**
      * @test
@@ -17,7 +18,7 @@ class CloseBufferHandlersTest extends \PHPUnit_Framework_TestCase
             $this->getHandler(),
         ];
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger
             ->expects($this->exactly(count($handlers)))
             ->method('debug')

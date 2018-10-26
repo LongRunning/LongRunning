@@ -3,10 +3,11 @@
 namespace LongRunning\Tests\Bundle\LongRunningBundle\DependencyInjection\Compiler;
 
 use LongRunning\Bundle\LongRunningBundle\DependencyInjection\Compiler\MonologCleanersPass;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class MonologCleanersPassBufferTest extends \PHPUnit_Framework_TestCase
+class MonologCleanersPassBufferTest extends TestCase
 {
     /**
      * @var ContainerBuilder

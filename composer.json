@@ -21,7 +21,7 @@
     "require-dev": {
         "doctrine/doctrine-bundle": "~1.0",
         "doctrine/orm": "~2.3",
-        "phpunit/phpunit": "~4.0",
+        "phpunit/phpunit": "^7.4",
         "simple-bus/rabbitmq-bundle-bridge": "~2.1",
         "symfony/framework-bundle": "~2.3 || ~3.0",
         "symfony/monolog-bundle": "~2.3",

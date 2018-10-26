@@ -3,10 +3,11 @@
 namespace LongRunning\Tests\Bundle\LongRunningBundle\DependencyInjection\Compiler;
 
 use LongRunning\Bundle\LongRunningBundle\DependencyInjection\Compiler\RegisterCleanersPass;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class RegisterCleanersPassTest extends \PHPUnit_Framework_TestCase
+class RegisterCleanersPassTest extends TestCase
 {
     /**
      * @var ContainerBuilder

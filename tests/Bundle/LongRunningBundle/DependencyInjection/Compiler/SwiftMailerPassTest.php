@@ -3,10 +3,11 @@
 namespace LongRunning\Tests\Bundle\LongRunningBundle\DependencyInjection\Compiler;
 
 use LongRunning\Bundle\LongRunningBundle\DependencyInjection\Compiler\SwiftMailerPass;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class SwiftMailerPassTest extends \PHPUnit_Framework_TestCase
+class SwiftMailerPassTest extends TestCase
 {
     /**
      * @var ContainerBuilder

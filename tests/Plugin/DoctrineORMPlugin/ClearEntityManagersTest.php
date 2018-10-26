@@ -4,8 +4,9 @@ namespace LongRunning\Tests\Plugin\DoctrineORMPlugin;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use LongRunning\Plugin\DoctrineORMPlugin\ClearEntityManagers;
+use PHPUnit\Framework\TestCase;
 
-class ClearEntityManagersTest extends \PHPUnit_Framework_TestCase
+class ClearEntityManagersTest extends TestCase
 {
     /**
      * @test
@@ -17,13 +18,13 @@ class ClearEntityManagersTest extends \PHPUnit_Framework_TestCase
             'second'    => $this->getManager(),
         ];
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry
             ->expects($this->once())
             ->method('getManagers')
             ->willReturn($managers);
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         foreach (array_keys($managers) as $count => $name) {
             $logger
                 ->expects($this->at($count))
