@@ -1,6 +1,6 @@
 parameters:
     kernel.secret: secret
-    log_file: %kernel.logs_dir%/test.log
+    log_file: '%kernel.logs_dir%/test.log'
 
 services:
     native_object_serializer:

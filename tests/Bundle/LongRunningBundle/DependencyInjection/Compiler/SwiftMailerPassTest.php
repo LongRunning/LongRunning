@@ -3,10 +3,11 @@
 namespace LongRunning\Tests\Bundle\LongRunningBundle\DependencyInjection\Compiler;
 
 use LongRunning\Bundle\LongRunningBundle\DependencyInjection\Compiler\SwiftMailerPass;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class SwiftMailerPassTest extends \PHPUnit_Framework_TestCase
+class SwiftMailerPassTest extends TestCase
 {
     /**
      * @var ContainerBuilder
@@ -66,6 +67,7 @@ class SwiftMailerPassTest extends \PHPUnit_Framework_TestCase
     private function createMailer($name, $default = false)
     {
         $mailer = new Definition('Swift_Mailer');
+        $mailer->setPublic(true);
         $this->container->setDefinition(sprintf('swiftmailer.mailer.%s', $name), $mailer);
 
         if ($default) {
@@ -79,12 +81,15 @@ class SwiftMailerPassTest extends \PHPUnit_Framework_TestCase
         $this->container->setParameter('swiftmailer.mailers', $mailers);
 
         $transport = new Definition('Swift_Transport_SpoolTransport');
+        $transport->setPublic(true);
         $this->container->setDefinition(sprintf('swiftmailer.mailer.%s.transport', $name), $transport);
 
         $spool = new Definition('Swift_MemorySpool');
+        $spool->setPublic(true);
         $this->container->setDefinition(sprintf('swiftmailer.mailer.%s.spool', $name), $spool);
 
         $realTransport = new Definition('Swift_SmtpTransport');
+        $realTransport->setPublic(true);
         $this->container->setDefinition(sprintf('swiftmailer.mailer.%s.transport.real', $name), $realTransport);
 
     }
