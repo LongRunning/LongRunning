@@ -4,3 +4,6 @@ services:
         arguments:
             # will be populated by RegisterCleanersPass
             - []
+
+    LongRunning\Core\DelegatingCleaner:
+        alias: long_running.delegating_cleaner
