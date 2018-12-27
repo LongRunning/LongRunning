@@ -5,5 +5,5 @@ services:
             # will be populated by RegisterCleanersPass
             - []
 
-    LongRunning\Core\DelegatingCleaner:
+    LongRunning\Core\Cleaner:
         alias: long_running.delegating_cleaner
