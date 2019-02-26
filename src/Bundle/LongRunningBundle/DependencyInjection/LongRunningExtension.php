@@ -54,6 +54,10 @@ class LongRunningExtension extends ConfigurableExtension implements PrependExten
         if ($mergedConfig['simple_bus_rabbit_mq']['enabled']) {
             $loader->load('simple_bus_rabbit_mq.yml');
         }
+
+        if (method_exists($container, 'registerForAutoconfiguration')) {
+            $container->registerForAutoconfiguration(Cleaner::class)->addTag('long_running.cleaner');
+        }
     }
 
     public function getConfiguration(array $config, ContainerBuilder $container)
