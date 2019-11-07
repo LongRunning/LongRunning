@@ -3,7 +3,7 @@ services:
         class: LongRunning\Plugin\SentryPlugin\ClearSentryErrors
         public: false
         arguments:
-            - '@Sentry\ClientInterface'
+            - '@sentry.client'
             - '@logger'
         tags:
             - { name: long_running.cleaner }

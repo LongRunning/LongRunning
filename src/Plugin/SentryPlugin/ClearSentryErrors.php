@@ -4,7 +4,7 @@ namespace LongRunning\Plugin\SentryPlugin;
 
 use LongRunning\Core\Cleaner;
 use Psr\Log\LoggerInterface;
-use Sentry\FlushableClientInterface;
+use Sentry\SentryBundle\SentrySymfonyClient;
 
 class ClearSentryErrors implements Cleaner
 {
@@ -14,11 +14,11 @@ class ClearSentryErrors implements Cleaner
     private $logger;
 
     /**
-     * @var FlushableClientInterface
+     * @var SentrySymfonyClient
      */
     private $sentry;
 
-    public function __construct(FlushableClientInterface $sentry,  LoggerInterface $logger)
+    public function __construct(SentrySymfonyClient $sentry,  LoggerInterface $logger)
     {
         $this->sentry = $sentry;
         $this->logger = $logger;
@@ -27,6 +27,7 @@ class ClearSentryErrors implements Cleaner
     public function cleanUp()
     {
         $this->logger->debug('Flush sentry errors');
-        $this->sentry->flush();
+        $this->sentry->sendUnsentErrors();
+        $this->sentry->breadcrumbs->reset();
     }
 }
