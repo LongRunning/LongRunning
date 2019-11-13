@@ -2,6 +2,7 @@
 
 namespace LongRunning\Bundle\LongRunningBundle\DependencyInjection;
 
+use LongRunning\Core\Cleaner;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Reference;
