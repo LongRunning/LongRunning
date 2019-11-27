@@ -4,7 +4,8 @@ namespace LongRunning\Tests\Plugin\SentryPlugin;
 
 use LongRunning\Plugin\SentryPlugin\ClearSentryErrors;
 use PHPUnit\Framework\TestCase;
-use Sentry\SentryBundle\SentrySymfonyClient;
+use Sentry\ClientInterface;
+use Sentry\FlushableClientInterface;
 
 class ClearSentryErrorsTest extends TestCase
 {
@@ -22,38 +23,21 @@ class ClearSentryErrorsTest extends TestCase
         $sentry = $this->getSentry();
         $sentry
             ->expects($this->once())
-            ->method('sendUnsentErrors');
-
-        $sentry
-            ->breadcrumbs
-            ->expects($this->once())
-            ->method('reset');
+            ->method('flush');
 
         $cleaner = new ClearSentryErrors($sentry,  $logger);
         $cleaner->cleanUp();
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|SentrySymfonyClient
+     * @return \PHPUnit_Framework_MockObject_MockObject|ClientInterface
      */
     private function getSentry()
     {
-        $sentry = $this->getMockBuilder('Sentry\SentryBundle\SentrySymfonyClient')
+        $sentry = $this->getMockBuilder('Sentry\FlushableClientInterface')
             ->disableOriginalConstructor()
             ->getMock();
-
-        $sentry->breadcrumbs = $this->getBreadcrumbs();
 
         return $sentry;
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Raven_Breadcrumbs
-     */
-    private function getBreadcrumbs()
-    {
-        return $this->getMockBuilder('Raven_Breadcrumbs')
-            ->disableOriginalConstructor()
-            ->getMock();
     }
 }

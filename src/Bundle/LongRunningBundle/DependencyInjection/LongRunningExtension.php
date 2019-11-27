@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use function interface_exists;
 
 class LongRunningExtension extends ConfigurableExtension implements PrependExtensionInterface
 {
@@ -49,7 +50,11 @@ class LongRunningExtension extends ConfigurableExtension implements PrependExten
         }
 
         if ($mergedConfig['sentry']['enabled']) {
-            $loader->load('sentry.yml');
+            if (interface_exists('Sentry\FlushableClientInterface')) {
+                $loader->load('sentry.yml');
+            } else {
+                $loader->load('sentry_bc.yml');
+            }
         }
 
         if ($mergedConfig['simple_bus_rabbit_mq']['enabled']) {

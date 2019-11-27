@@ -10,6 +10,10 @@
             "email": "cliff@jcid.nl"
         },
         {
+            "name": "Ruud Kamphuis",
+            "homepage": "github.com/ruudk"
+        },
+        {
             "name": "Matthias Noback",
             "email": "matthiasnoback@gmail.com",
             "homepage": "http://php-and-symfony.matthiasnoback.nl"
@@ -25,7 +29,7 @@
         "simple-bus/rabbitmq-bundle-bridge": "~2.1 || ~4.0",
         "symfony/monolog-bundle": "^3.1.2",
         "symfony/swiftmailer-bundle": "~2.3 || ~3.2",
-        "sentry/sentry-symfony": "~1.0 || ~2.0"
+        "sentry/sentry-symfony": "^3.0"
     },
     "autoload": {
         "psr-4": {
