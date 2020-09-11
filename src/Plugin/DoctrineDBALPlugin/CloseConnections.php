@@ -2,7 +2,6 @@
 
 namespace LongRunning\Plugin\DoctrineDBALPlugin;
 
-use Doctrine\Common\Persistence\ConnectionRegistry;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
 use LongRunning\Core\Cleaner;
@@ -20,7 +19,7 @@ class CloseConnections implements Cleaner
      */
     private $logger;
 
-    public function __construct(ConnectionRegistry $connectionRegistry, LoggerInterface $logger)
+    public function __construct($connectionRegistry, LoggerInterface $logger)
     {
         $this->connectionRegistry = $connectionRegistry;
         $this->logger = $logger;

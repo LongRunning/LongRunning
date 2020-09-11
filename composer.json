@@ -22,7 +22,7 @@
         "php": "^7.1"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "~1.0",
+        "doctrine/doctrine-bundle": "~1.0 || ^2.0",
         "doctrine/orm": "~2.3",
         "phpunit/phpunit": "^7.4",
         "simple-bus/rabbitmq-bundle-bridge": "~2.1 || ~4.0",

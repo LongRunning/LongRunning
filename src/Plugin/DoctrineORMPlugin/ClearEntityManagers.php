@@ -2,7 +2,6 @@
 
 namespace LongRunning\Plugin\DoctrineORMPlugin;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use LongRunning\Core\Cleaner;
 use Psr\Log\LoggerInterface;
 
@@ -18,7 +17,7 @@ class ClearEntityManagers implements Cleaner
      */
     private $logger;
 
-    public function __construct(ManagerRegistry $managerRegistry, LoggerInterface $logger)
+    public function __construct($managerRegistry, LoggerInterface $logger)
     {
         $this->managerRegistry = $managerRegistry;
         $this->logger = $logger;

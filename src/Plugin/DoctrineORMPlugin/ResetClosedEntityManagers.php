@@ -20,7 +20,7 @@ class ResetClosedEntityManagers implements Cleaner
      */
     private $logger;
 
-    public function __construct(ManagerRegistry $managerRegistry, LoggerInterface $logger)
+    public function __construct($managerRegistry, LoggerInterface $logger)
     {
         $this->managerRegistry = $managerRegistry;
         $this->logger = $logger;
