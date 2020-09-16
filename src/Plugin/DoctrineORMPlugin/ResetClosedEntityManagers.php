@@ -2,7 +2,7 @@
 
 namespace LongRunning\Plugin\DoctrineORMPlugin;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use LongRunning\Core\Cleaner;
@@ -20,7 +20,7 @@ class ResetClosedEntityManagers implements Cleaner
      */
     private $logger;
 
-    public function __construct($managerRegistry, LoggerInterface $logger)
+    public function __construct(ManagerRegistry $managerRegistry, LoggerInterface $logger)
     {
         $this->managerRegistry = $managerRegistry;
         $this->logger = $logger;
