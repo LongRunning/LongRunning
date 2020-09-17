@@ -2,7 +2,7 @@
 
 namespace LongRunning\Plugin\DoctrineORMPlugin;
 
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use LongRunning\Core\Cleaner;
 use Psr\Log\LoggerInterface;
 

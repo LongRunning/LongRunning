@@ -2,7 +2,7 @@
 
 namespace LongRunning\Plugin\DoctrineORMPlugin;
 
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use LongRunning\Core\Cleaner;
