@@ -2,7 +2,7 @@
 
 namespace LongRunning\Plugin\DoctrineORMPlugin;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use LongRunning\Core\Cleaner;
 use Psr\Log\LoggerInterface;
 
