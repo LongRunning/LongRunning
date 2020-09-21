@@ -4,6 +4,9 @@ namespace LongRunning\Tests\Plugin\SwiftMailerPlugin;
 
 use LongRunning\Plugin\SwiftMailerPlugin\ClearSpools;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
+use Swift_MemorySpool;
+use Swift_Transport;
 
 class ClearSpoolsTest extends TestCase
 {
@@ -22,7 +25,7 @@ class ClearSpoolsTest extends TestCase
             $spools[$name] = $this->getSpool($transport);
         }
 
-        $logger = $this->createMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $logger
             ->expects($this->exactly(count($transports)))
             ->method('debug')
@@ -42,13 +45,13 @@ class ClearSpoolsTest extends TestCase
         ];
 
         $spools = [];
-        $spools['default'] = $spool = $this->createMock('Swift_MemorySpool');
+        $spools['default'] = $spool = $this->createMock(Swift_MemorySpool::class);
         $spool
             ->expects($this->once())
             ->method('flushQueue')
             ->willThrowException(new \Swift_TransportException('Fake error'));
 
-        $logger = $this->createMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $logger
             ->expects($this->exactly(count($transports)))
             ->method('debug')
@@ -67,7 +70,7 @@ class ClearSpoolsTest extends TestCase
      */
     private function getTransport()
     {
-        return $this->createMock('Swift_Transport');
+        return $this->createMock(Swift_Transport::class);
     }
 
     /**
@@ -76,7 +79,7 @@ class ClearSpoolsTest extends TestCase
      */
     private function getSpool(\Swift_Transport $transport)
     {
-        $spool = $this->createMock('Swift_MemorySpool');
+        $spool = $this->createMock(Swift_MemorySpool::class);
         $spool
             ->expects($this->once())
             ->method('flushQueue')

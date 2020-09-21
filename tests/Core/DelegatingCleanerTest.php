@@ -26,7 +26,7 @@ class DelegatingCleanerTest extends TestCase
      */
     private function getCleaner()
     {
-        $cleaner = $this->createMock('LongRunning\Core\Cleaner');
+        $cleaner = $this->createMock(Cleaner::class);
         $cleaner
             ->expects($this->once())
             ->method('cleanUp');

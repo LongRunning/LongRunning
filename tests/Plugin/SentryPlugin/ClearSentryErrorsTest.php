@@ -4,6 +4,7 @@ namespace LongRunning\Tests\Plugin\SentryPlugin;
 
 use LongRunning\Plugin\SentryPlugin\ClearSentryErrors;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Sentry\ClientInterface;
 use Sentry\FlushableClientInterface;
 
@@ -14,7 +15,7 @@ class ClearSentryErrorsTest extends TestCase
      */
     public function it_test_if_handlers_get_cleared()
     {
-        $logger = $this->createMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $logger
             ->expects($this->once())
             ->method('debug')
@@ -34,7 +35,7 @@ class ClearSentryErrorsTest extends TestCase
      */
     private function getSentry()
     {
-        $sentry = $this->getMockBuilder('Sentry\FlushableClientInterface')
+        $sentry = $this->getMockBuilder(FlushableClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
