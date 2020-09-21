@@ -2,7 +2,7 @@
 
 namespace LongRunning\Tests\Plugin\DoctrineDBALPlugin;
 
-use Doctrine\Common\Persistence\ConnectionRegistry;
+use Doctrine\Persistence\ConnectionRegistry;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
 use LongRunning\Plugin\DoctrineDBALPlugin\CloseConnections;
