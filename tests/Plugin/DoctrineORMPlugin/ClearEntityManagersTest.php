@@ -2,7 +2,8 @@
 
 namespace LongRunning\Tests\Plugin\DoctrineORMPlugin;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
 use LongRunning\Plugin\DoctrineORMPlugin\ClearEntityManagers;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -19,7 +20,7 @@ class ClearEntityManagersTest extends TestCase
             'second'    => $this->getManager(),
         ];
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry
             ->expects($this->once())
             ->method('getManagers')
@@ -42,7 +43,7 @@ class ClearEntityManagersTest extends TestCase
      */
     private function getManager()
     {
-        $manager = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
+        $manager = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 

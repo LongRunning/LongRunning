@@ -2,9 +2,10 @@
 
 namespace LongRunning\Tests\Plugin\DoctrineORMPlugin;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use LongRunning\Plugin\DoctrineORMPlugin\ResetClosedEntityManagers;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -17,11 +18,11 @@ class ResetClosedEntityManagersTest extends TestCase
     public function it_resets_entity_managers()
     {
         $managers = [
-            'default'   => $this->getEntityManager('Doctrine\ORM\EntityManager'),
-            'second'    => $this->getEntityManager('Doctrine\ORM\EntityManager'),
+            'default'   => $this->getEntityManager(EntityManager::class),
+            'second'    => $this->getEntityManager(EntityManager::class),
         ];
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry
             ->expects($this->once())
             ->method('getManagers')
@@ -52,11 +53,11 @@ class ResetClosedEntityManagersTest extends TestCase
     public function it_resets_entity_manager_interfase()
     {
         $managers = [
-            'default'   => $this->getEntityManager('Doctrine\ORM\EntityManagerInterface'),
-            'second'    => $this->getEntityManager('Doctrine\ORM\EntityManagerInterface'),
+            'default'   => $this->getEntityManager(EntityManagerInterface::class),
+            'second'    => $this->getEntityManager(EntityManagerInterface::class),
         ];
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry
             ->expects($this->once())
             ->method('getManagers')
@@ -90,7 +91,7 @@ class ResetClosedEntityManagersTest extends TestCase
             'default'   => $this->getObjectManager(),
         ];
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry
             ->expects($this->once())
             ->method('getManagers')
@@ -129,7 +130,7 @@ class ResetClosedEntityManagersTest extends TestCase
      */
     private function getObjectManager()
     {
-        $manager = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
+        $manager = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
