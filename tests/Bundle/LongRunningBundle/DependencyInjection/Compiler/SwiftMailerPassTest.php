@@ -38,6 +38,8 @@ class SwiftMailerPassTest extends TestCase
         $this->container->removeDefinition('long_running.swift_mailer.clear_spools');
 
         $this->container->compile();
+
+        $this->addToAssertionCount(1);
     }
 
     /**
@@ -46,6 +48,8 @@ class SwiftMailerPassTest extends TestCase
     public function it_has_no_mailers()
     {
         $this->container->compile();
+
+        $this->addToAssertionCount(1);
     }
 
     /**
