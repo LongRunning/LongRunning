@@ -13,6 +13,7 @@ matrix:
 env:
   global:
     - SYMFONY_VERSION=""
+    - COMPOSER_MEMORY_LIMIT=-1
 
 before_install:
   - composer self-update
