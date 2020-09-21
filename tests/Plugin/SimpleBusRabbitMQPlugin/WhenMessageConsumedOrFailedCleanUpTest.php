@@ -2,6 +2,7 @@
 
 namespace LongRunning\Tests\Plugin\SimpleBusRabbitMQPlugin;
 
+use LongRunning\Core\Cleaner;
 use LongRunning\Plugin\SimpleBusRabbitMQPlugin\WhenMessageConsumedOrFailedCleanUp;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\RabbitMQBundleBridge\Event\Events;
@@ -14,7 +15,7 @@ class WhenMessageConsumedOrFailedCleanUpTest extends TestCase
      */
     public function it_tests_that_we_cleanup_after_consumed()
     {
-        $delegatedCleaner = $this->createMock('LongRunning\Core\Cleaner');
+        $delegatedCleaner = $this->createMock(Cleaner::class);
         $delegatedCleaner
             ->expects($this->once())
             ->method('cleanUp');
@@ -31,7 +32,7 @@ class WhenMessageConsumedOrFailedCleanUpTest extends TestCase
      */
     public function it_tests_that_we_cleanup_after_consumption_failed()
     {
-        $delegatedCleaner = $this->createMock('LongRunning\Core\Cleaner');
+        $delegatedCleaner = $this->createMock(Cleaner::class);
         $delegatedCleaner
             ->expects($this->once())
             ->method('cleanUp');
@@ -48,7 +49,7 @@ class WhenMessageConsumedOrFailedCleanUpTest extends TestCase
      */
     public function it_tests_that_we_dont_cleanup_after_other_events()
     {
-        $delegatedCleaner = $this->createMock('LongRunning\Core\Cleaner');
+        $delegatedCleaner = $this->createMock(Cleaner::class);
         $delegatedCleaner
             ->expects($this->never())
             ->method('cleanUp');

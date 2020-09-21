@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use LongRunning\Plugin\DoctrineORMPlugin\ResetClosedEntityManagers;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 class ResetClosedEntityManagersTest extends TestCase
 {
@@ -33,7 +34,7 @@ class ResetClosedEntityManagersTest extends TestCase
                 ->with($name);
         }
 
-        $logger = $this->createMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         foreach (array_keys($managers) as $count => $name) {
             $logger
                 ->expects($this->at($count))
@@ -68,7 +69,7 @@ class ResetClosedEntityManagersTest extends TestCase
                 ->with($name);
         }
 
-        $logger = $this->createMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         foreach (array_keys($managers) as $count => $name) {
             $logger
                 ->expects($this->at($count))
@@ -95,7 +96,7 @@ class ResetClosedEntityManagersTest extends TestCase
             ->method('getManagers')
             ->willReturn($managers);
 
-        $logger = $this->createMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $logger
             ->expects($this->never())
             ->method('debug');

@@ -5,6 +5,7 @@ namespace LongRunning\Tests\Plugin\DoctrineORMPlugin;
 use Doctrine\Common\Persistence\ObjectManager;
 use LongRunning\Plugin\DoctrineORMPlugin\ClearEntityManagers;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 class ClearEntityManagersTest extends TestCase
 {
@@ -24,7 +25,7 @@ class ClearEntityManagersTest extends TestCase
             ->method('getManagers')
             ->willReturn($managers);
 
-        $logger = $this->createMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         foreach (array_keys($managers) as $count => $name) {
             $logger
                 ->expects($this->at($count))

@@ -2,6 +2,7 @@
 
 namespace LongRunning\Tests\Plugin\BernardPlugin;
 
+use LongRunning\Core\Cleaner;
 use LongRunning\Plugin\BernardPlugin\WhenEnvelopeAcknowledgedOrRejectedCleanUp;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -13,7 +14,7 @@ class WhenEnvelopeAcknowledgedOrRejectedCleanUpTest extends TestCase
      */
     public function it_tests_that_we_cleanup_after_envelope_acknowledge()
     {
-        $delegatedCleaner = $this->createMock('LongRunning\Core\Cleaner');
+        $delegatedCleaner = $this->createMock(Cleaner::class);
         $delegatedCleaner
             ->expects($this->once())
             ->method('cleanUp');
@@ -30,7 +31,7 @@ class WhenEnvelopeAcknowledgedOrRejectedCleanUpTest extends TestCase
      */
     public function it_tests_that_we_cleanup_after_envelope_rejected()
     {
-        $delegatedCleaner = $this->createMock('LongRunning\Core\Cleaner');
+        $delegatedCleaner = $this->createMock(Cleaner::class);
         $delegatedCleaner
             ->expects($this->once())
             ->method('cleanUp');
@@ -47,7 +48,7 @@ class WhenEnvelopeAcknowledgedOrRejectedCleanUpTest extends TestCase
      */
     public function it_tests_that_we_dont_cleanup_after_other_events()
     {
-        $delegatedCleaner = $this->createMock('LongRunning\Core\Cleaner');
+        $delegatedCleaner = $this->createMock(Cleaner::class);
         $delegatedCleaner
             ->expects($this->never())
             ->method('cleanUp');
