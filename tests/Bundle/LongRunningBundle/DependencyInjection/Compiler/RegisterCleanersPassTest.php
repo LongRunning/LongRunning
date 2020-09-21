@@ -37,6 +37,9 @@ class RegisterCleanersPassTest extends TestCase
         $this->container->removeDefinition('long_running.delegating_cleaner');
 
         $this->container->compile();
+
+        $this->addToAssertionCount(1);
+
     }
 
     /**
