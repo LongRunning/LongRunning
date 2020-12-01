@@ -1,0 +1,16 @@
+services:
+    LongRunning\DoctrineORM\Cleaner\ClearEntityManagers:
+        public: false
+        arguments:
+            - '@doctrine'
+            - '@Psr\Log\LoggerInterface'
+        tags:
+            - { name: long_running.cleaner }
+
+    LongRunning\DoctrineORM\Cleaner\ResetClosedEntityManagers:
+        public: false
+        arguments:
+            - '@doctrine'
+            - '@Psr\Log\LoggerInterface'
+        tags:
+            - { name: long_running.cleaner }

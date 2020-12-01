@@ -1,7 +1,0 @@
-services:
-    long_running.bernard.when_envelope_acknowledged_or_rejected_clean_up:
-        class: LongRunning\Plugin\BernardPlugin\WhenEnvelopeAcknowledgedOrRejectedCleanUp
-        arguments:
-            - '@long_running.delegating_cleaner'
-        tags:
-            - { name: kernel.event_subscriber }

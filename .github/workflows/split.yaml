@@ -1,0 +1,52 @@
+name: Split
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build-matrix:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                    tools: composer:v2
+            -   run: composer install --no-progress --ansi
+            -   id: set-matrix
+                run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json --names)"
+        outputs:
+            matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+    split:
+        needs: build-matrix
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix: ${{fromJson(needs.build-matrix.outputs.matrix)}}
+        steps:
+            -   uses: actions/checkout@v2
+                # this is required for "WyriHaximus/github-action-get-previous-tag" workflow
+                # see https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches
+                with:
+                    fetch-depth: 0
+
+            # see https://github.com/WyriHaximus/github-action-get-previous-tag
+            -   id: previous_tag
+                uses: "WyriHaximus/github-action-get-previous-tag@master"
+
+            # Uses an action in the root directory
+            -   uses: TomasVotruba/github-action-monorepo-split@66f446a05c2d257299e67074d29d98e7d837002e
+                env:
+                    GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+                with:
+                    package-directory: 'packages/${{ matrix.package_name }}'
+                    split-repository-organization: 'LongRunning'
+                    split-repository-name: '${{ matrix.package_name }}'
+                    user-email: longrunning-bot@users.noreply.github.com
+                    user-name: longrunning-bot
+                    tag: ${{ steps.previous_tag.outputs.tag }}
+                    branch: main

@@ -1,38 +1,43 @@
 name: Tests
 
-on: [push]
+on: [ push ]
+
+env:
+    COMPOSER_ROOT_VERSION: "dev-master"
 
 jobs:
-    build:
+    build-matrix:
         runs-on: ubuntu-latest
-
-        strategy:
-            matrix:
-                php-version: ['7.3', '7.4']
-                symfony-version: ['3.4.*', '4.4.*']
-                dependencies: ['highest', 'lowest']
-
-        name: PHP ${{ matrix.php-version }} tests with ${{ matrix.dependencies }} dependencies
         steps:
-            - name: Checkout
-              uses: actions/checkout@v2
+            -   uses: actions/checkout@v2
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                    tools: composer:v2
+            -   run: composer install --no-progress --ansi
+            -   run: vendor/bin/monorepo-builder validate
+            -   id: set-matrix
+                run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json | sed 's/.$/,"php_version":["7.4", "8.0"]}/')"
+        outputs:
+            matrix: ${{ steps.set-matrix.outputs.matrix }}
 
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ matrix.php-version }}
-
-            - name: Install dependencies
-              run: |
-                  composer require --no-update symfony/framework-bundle "${{ matrix.symfony-version }}"
-                  if [ "${{ matrix.dependencies }}" = "lowest" ]; then
-                    composer update --prefer-lowest --prefer-dist --no-progress
-                  else
-                    composer update --prefer-dist --no-progress
-                  fi
-
-            - name: Validate composer.json and composer.lock
-              run: composer validate
-
-            - name: Run test suite
-              run: vendor/bin/phpunit
+    tests:
+        needs: build-matrix
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix: ${{fromJson(needs.build-matrix.outputs.matrix)}}
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php_version }}
+                    coverage: none
+                    tools: composer:v2
+            -   run: composer install --no-progress --ansi
+            -   run: vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.package_path }}/composer.json --ansi
+            -   run: composer update --no-progress --ansi --working-dir ${{ matrix.package_path }}
+            -   name: Split Tests of ${{ matrix.package_path }}
+                working-directory: ${{ matrix.package_path }}
+                run: vendor/bin/phpunit

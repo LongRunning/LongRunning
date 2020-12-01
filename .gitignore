@@ -1,6 +1,4 @@
-/build/
-/tests/Functional/temp
+/packages/*/var
+vendor
 composer.lock
-phpunit.xml
-vendor/
-/.phpunit.result.cache
+.phpunit.result.cache

@@ -1,0 +1,14 @@
+framework:
+    test: ~
+
+services:
+    public_cleaner:
+        alias: LongRunning\Core\DelegatingCleaner
+        public: true
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: '%kernel.project_dir%/var/data.sqlite'
+        memory: true
+    orm: ~

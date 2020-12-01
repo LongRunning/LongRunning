@@ -1,4 +1,5 @@
 {
+    "name": "long-running/sentry",
     "license": "MIT",
     "authors": [
         {
@@ -16,24 +17,24 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0"
+        "php": "^7.4 || ^8.0",
+        "symfony/yaml": "^4.4 || ^5.1",
+        "long-running/core": "^1.0",
+        "psr/log": "^1.0.1",
+        "sentry/sentry-symfony": "^3.5"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5.12",
-        "symfony/framework-bundle": "^4.4 || ^5.1",
-        "symplify/monorepo-builder": "9.0.0-BETA9"
+        "phpunit/phpunit": "^8.5.12"
     },
     "autoload": {
         "psr-4": {
-            "LongRunning\\Core\\": "packages/core/src",
-            "LongRunning\\DoctrineORM\\": "packages/doctrine-orm/src",
-            "LongRunning\\Sentry\\": "packages/sentry/src"
+            "LongRunning\\Sentry\\": "src"
         }
     },
-    "replace": {
-        "long-running/core": "self.version",
-        "long-running/doctrine-orm": "self.version",
-        "long-running/sentry": "self.version"
+    "autoload-dev": {
+        "psr-4": {
+            "LongRunning\\Sentry\\": "tests"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
