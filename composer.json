@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.3"
+        "php": "^7.3 || ^8.0"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.0",
