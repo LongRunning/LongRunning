@@ -50,11 +50,7 @@ class LongRunningExtension extends ConfigurableExtension implements PrependExten
         }
 
         if ($mergedConfig['sentry']['enabled']) {
-            if (interface_exists('Sentry\FlushableClientInterface')) {
-                $loader->load('sentry.yml');
-            } else {
-                $loader->load('sentry_bc.yml');
-            }
+            $loader->load('sentry.yml');
         }
 
         if ($mergedConfig['simple_bus_rabbit_mq']['enabled']) {
