@@ -1,5 +1,5 @@
 {
-    "name": "long-running/long-running",
+    "name": "long-running/core",
     "type": "library",
     "description": "Tools for working with long-running processes",
     "homepage": "http://github.com/LongRunning/LongRunning",
