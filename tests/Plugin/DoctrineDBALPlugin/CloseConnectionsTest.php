@@ -147,12 +147,12 @@ class CloseConnectionsTest extends TestCase
 
     /**
      * @test
-     *
-     * @expectedException        \LogicException
-     * @expectedExceptionMessage Expected only instances of Connection
      */
     public function it_throws_exception_with_wrong_connection()
     {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('Expected only instances of Connection');
+
         $registry = $this->createMock(ConnectionRegistry::class);
         $registry
             ->expects($this->once())

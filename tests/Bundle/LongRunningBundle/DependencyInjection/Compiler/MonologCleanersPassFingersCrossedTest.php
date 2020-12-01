@@ -19,7 +19,7 @@ class MonologCleanersPassFingersCrossedTest extends TestCase
      */
     private $fingersCrossedHandlersDefinition;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->container = new ContainerBuilder();
 

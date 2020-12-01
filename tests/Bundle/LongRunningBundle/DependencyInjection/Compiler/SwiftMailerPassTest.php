@@ -19,7 +19,7 @@ class SwiftMailerPassTest extends TestCase
      */
     private $swiftMailerCleaner;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->container = new ContainerBuilder();
 

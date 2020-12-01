@@ -14,7 +14,7 @@ class MonologBufferTest extends KernelTestCase
         return 'LongRunning\Tests\Functional\TestKernel';
     }
 
-    protected function setUp()
+    protected function setUp() : void
     {
         static::bootKernel();
     }
