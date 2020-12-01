@@ -1,9 +1,0 @@
-services:
-    long_running.sentry.clear_sentry_errors:
-        class: LongRunning\Plugin\SentryPlugin\ClearSentryErrorsBC
-        public: false
-        arguments:
-            - '@sentry.client'
-            - '@logger'
-        tags:
-            - { name: long_running.cleaner }
