@@ -1,0 +1,38 @@
+name: Tests
+
+on: [push]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                php-version: ['7.3', '7.4']
+                symfony-version: ['3.4.*', '4.4.*']
+                dependencies: ['highest', 'lowest']
+
+        name: PHP ${{ matrix.php-version }} tests with ${{ matrix.dependencies }} dependencies
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-version }}
+
+            - name: Install dependencies
+              run: |
+                  composer require --no-update symfony/framework-bundle "${{ matrix.symfony-version }}"
+                  if [ "${{ matrix.dependencies }}" = "lowest" ]; then
+                    composer update --prefer-lowest --prefer-dist --no-progress
+                  else
+                    composer update --prefer-dist --no-progress
+                  fi
+
+            - name: Validate composer.json and composer.lock
+              run: composer validate
+
+            - name: Run test suite
+              run: vendor/bin/phpunit
