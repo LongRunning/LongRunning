@@ -19,7 +19,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "symfony/yaml": "^4.4 || ^5.1",
-        "long-running/core": "^1.0",
+        "long-running/core": "dev-main",
         "psr/log": "^1.0.1",
         "sentry/sentry-symfony": "^3.5"
     },
