@@ -39,7 +39,7 @@ jobs:
             #    uses: "WyriHaximus/github-action-get-previous-tag@master"
 
             # Uses an action in the root directory
-            -   uses: TomasVotruba/github-action-monorepo-split@18ed24f994a999f23d7d8bfaa7cc4e3c3f0593be
+            -   uses: TomasVotruba/github-action-monorepo-split@be29e4a9543487740cad0f2bc92627211c366ed4
                 env:
                     GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
                 with:
