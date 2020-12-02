@@ -18,7 +18,7 @@ jobs:
             -   run: composer install --no-progress --ansi
             -   run: vendor/bin/monorepo-builder validate
             -   id: set-matrix
-                run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json | sed 's/.$/,"php_version":["7.4", "8.0"]}/')"
+                run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json)"
         outputs:
             matrix: ${{ steps.set-matrix.outputs.matrix }}
 
@@ -27,17 +27,19 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
-            matrix: ${{fromJson(needs.build-matrix.outputs.matrix)}}
+            matrix: 
+                php-version: ["7.4", "8.0"]
+                package: ${{fromJson(needs.build-matrix.outputs.matrix).package_path}}
         steps:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v2
                 with:
-                    php-version: ${{ matrix.php_version }}
+                    php-version: ${{ matrix.php-version }}
                     coverage: none
                     tools: composer:v2
             -   run: composer install --no-progress --ansi
-            -   run: vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.package_path }}/composer.json --ansi
-            -   run: composer update --no-progress --ansi --working-dir ${{ matrix.package_path }}
-            -   name: Split Tests of ${{ matrix.package_path }}
-                working-directory: ${{ matrix.package_path }}
+            -   run: vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.package }}/composer.json --ansi
+            -   run: composer update --no-progress --ansi --working-dir ${{ matrix.package }}
+            -   name: Split Tests of ${{ matrix.package }}
+                working-directory: ${{ matrix.package }}
                 run: vendor/bin/phpunit
