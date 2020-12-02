@@ -20,7 +20,7 @@ jobs:
             -   id: set-matrix
                 run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json)"
         outputs:
-            matrix: ${{ fromJson(steps.set-matrix.outputs.matrix) }}
+            matrix: ${{ steps.set-matrix.outputs.matrix }}
 
     tests:
         needs: build-matrix
@@ -31,7 +31,7 @@ jobs:
                 php-version:
                     - 7.4
                     - 8.0
-                package: ${{ needs.build-matrix.outputs.matrix.package_path }}
+                package: ${{ fromJson(needs.build-matrix.outputs.matrix).package_path.* }}
         steps:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v2
