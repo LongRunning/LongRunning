@@ -28,8 +28,10 @@ jobs:
         strategy:
             fail-fast: false
             matrix: 
-                php-version: ["7.4", "8.0"]
-                package: ${{fromJson(needs.build-matrix.outputs.matrix).package_path}}
+                php-version:
+                    - 7.4
+                    - 8.0
+                package: ${{ fromJson(needs.build-matrix.outputs.matrix).package_path }}
         steps:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v2
