@@ -17,10 +17,10 @@ jobs:
                     tools: composer:v2
             -   run: composer install --no-progress --ansi
             -   run: vendor/bin/monorepo-builder validate
-            -   id: set-matrix
-                run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json | cut -d ":" -f 2 | sed 's/.$//')"
+            -   id: set-packages
+                run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json | cut -d ":" -f 2 | sed 's/.$//')"
         outputs:
-            matrix: ${{ steps.set-matrix.outputs.matrix }}
+            packages: ${{ steps.set-packages.outputs.packages }}
 
     tests:
         needs: build-matrix
@@ -29,7 +29,7 @@ jobs:
             fail-fast: false
             matrix: 
                 php-version: ['7.4', '8.0']
-                package: ${{ fromJson(needs.build-matrix.outputs.matrix) }}
+                package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
         steps:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v2

@@ -16,17 +16,18 @@ jobs:
                     coverage: none
                     tools: composer:v2
             -   run: composer install --no-progress --ansi
-            -   id: set-matrix
-                run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json --names)"
+            -   id: set-packages
+                run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json --names | cut -d ":" -f 2 | sed 's/.$//')"
         outputs:
-            matrix: ${{ steps.set-matrix.outputs.matrix }}
+            packages: ${{ steps.set-packages.outputs.packages }}
 
     split:
         needs: build-matrix
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
-            matrix: ${{fromJson(needs.build-matrix.outputs.matrix)}}
+            matrix: 
+                package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
         steps:
             -   uses: actions/checkout@v2
                 # this is required for "WyriHaximus/github-action-get-previous-tag" workflow
@@ -43,10 +44,10 @@ jobs:
                 env:
                     GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
                 with:
-                    package-directory: 'packages/${{ matrix.package_name }}'
+                    package-directory: 'packages/${{ matrix.package }}'
                     split-repository-organization: 'LongRunning'
-                    split-repository-name: '${{ matrix.package_name }}'
+                    split-repository-name: '${{ matrix.package }}'
                     user-email: longrunning-bot@users.noreply.github.com
                     user-name: longrunning-bot
-                    #tag: ${{ steps.previous_tag.outputs.tag }}
                     branch: main
+                    #tag: ${{ steps.previous_tag.outputs.tag }}
