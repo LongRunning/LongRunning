@@ -15,7 +15,9 @@ jobs:
                     php-version: 7.4
                     coverage: none
                     tools: composer:v2
-            -   run: composer install --no-progress --ansi
+            -   run: |
+                    composer init --no-interaction --stability=dev --require=symplify/monorepo-builder:9.0.0-BETA9
+                    composer install --no-progress --ansi
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json --names | cut -d ":" -f 2 | sed 's/.$//')"
         outputs:
@@ -26,7 +28,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
-            matrix: 
+            matrix:
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
         steps:
             -   uses: actions/checkout@v2

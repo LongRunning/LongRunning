@@ -15,7 +15,9 @@ jobs:
                     php-version: 7.4
                     coverage: none
                     tools: composer:v2
-            -   run: composer install --no-progress --ansi
+            -   run: |
+                    composer init --no-interaction --stability=dev --require=symplify/monorepo-builder:9.0.0-BETA9
+                    composer install --no-progress --ansi
             -   run: vendor/bin/monorepo-builder validate
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json | cut -d ":" -f 2 | sed 's/.$//')"
@@ -27,8 +29,8 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
-            matrix: 
-                php-version: ['7.4', '8.0']
+            matrix:
+                php-version: [ '7.4', '8.0' ]
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
         steps:
             -   uses: actions/checkout@v2
@@ -37,7 +39,9 @@ jobs:
                     php-version: ${{ matrix.php-version }}
                     coverage: none
                     tools: composer:v2
-            -   run: composer install --no-progress --ansi
+            -   run: |
+                    composer init --no-interaction --stability=dev --require=symplify/monorepo-builder:9.0.0-BETA9
+                    composer install --no-progress --ansi
             -   run: vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.package }}/composer.json --ansi
             -   run: composer update --no-progress --ansi --working-dir ${{ matrix.package }}
             -   name: Split Tests of ${{ matrix.package }}
