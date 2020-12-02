@@ -1,8 +1,0 @@
-services:
-    LongRunning\Sentry\Cleaner\FlushSentryErrors:
-        public: false
-        arguments:
-            - '@Sentry\ClientInterface'
-            - '@Psr\Log\LoggerInterface'
-        tags:
-            - { name: long_running.cleaner }

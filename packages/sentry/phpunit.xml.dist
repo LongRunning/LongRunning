@@ -6,6 +6,6 @@
         </testsuite>
     </testsuites>
     <php>
-        <server name="KERNEL_CLASS" value="LongRunning\Core\Functional\TestKernel"/>
+        <server name="KERNEL_CLASS" value="LongRunning\Sentry\Functional\TestKernel"/>
     </php>
 </phpunit>

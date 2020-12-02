@@ -1,10 +1,10 @@
 <?php
 
-namespace LongRunning\DoctrineORM\Functional;
+namespace LongRunning\Sentry\Functional;
 
-use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use LongRunning\Core\Bundle\LongRunningBundle;
-use LongRunning\DoctrineORM\Bundle\LongRunningDoctrineORMBundle;
+use LongRunning\Sentry\Bundle\LongRunningSentryBundle;
+use Sentry\SentryBundle\SentryBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\HttpKernel\Kernel;
@@ -17,9 +17,9 @@ final class TestKernel extends Kernel
     public function registerBundles() : array
     {
         return [
-            new DoctrineBundle(),
+            new SentryBundle(),
             new LongRunningBundle(),
-            new LongRunningDoctrineORMBundle(),
+            new LongRunningSentryBundle(),
             new FrameworkBundle(),
         ];
     }

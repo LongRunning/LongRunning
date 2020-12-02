@@ -1,6 +1,0 @@
-services:
-    LongRunning\Core\Cleaner: '@LongRunning\Core\DelegatingCleaner'
-
-    LongRunning\Core\DelegatingCleaner:
-        bind:
-            $cleaners: !tagged 'long_running.cleaner'

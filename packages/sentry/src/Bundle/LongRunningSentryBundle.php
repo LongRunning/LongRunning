@@ -1,6 +1,6 @@
 <?php
 
-namespace LongRunning\Sentry\LongRunningSentryBundle;
+namespace LongRunning\Sentry\Bundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
