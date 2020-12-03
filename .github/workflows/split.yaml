@@ -16,7 +16,7 @@ jobs:
                     coverage: none
                     tools: composer:v2
             -   run: |
-                    composer init --no-interaction --stability=dev --require=symplify/monorepo-builder:9.0.0-BETA9
+                    composer init --no-interaction --stability=beta --require-dev=symplify/monorepo-builder:9.0.0-BETA9
                     composer install --no-progress --ansi
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json --names | cut -d ":" -f 2 | sed 's/.$//')"

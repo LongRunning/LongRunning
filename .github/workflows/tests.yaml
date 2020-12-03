@@ -16,7 +16,7 @@ jobs:
                     coverage: none
                     tools: composer:v2
             -   run: |
-                    composer init --no-interaction --stability=dev --require=symplify/monorepo-builder:9.0.0-BETA9
+                    composer init --no-interaction --stability=beta --require-dev=symplify/monorepo-builder:9.0.0-BETA9
                     composer install --no-progress --ansi
             -   run: vendor/bin/monorepo-builder validate
             -   id: set-packages
@@ -40,7 +40,7 @@ jobs:
                     coverage: none
                     tools: composer:v2
             -   run: |
-                    composer init --no-interaction --stability=dev --require=symplify/monorepo-builder:9.0.0-BETA9
+                    composer init --no-interaction --stability=beta --require-dev=symplify/monorepo-builder:9.0.0-BETA9
                     composer install --no-progress --ansi
             -   run: vendor/bin/monorepo-builder localize-composer-paths ${{ matrix.package }}/composer.json --ansi
             -   run: composer update --no-progress --ansi --working-dir ${{ matrix.package }}
