@@ -1,15 +1,18 @@
 <?php
 
-namespace LongRunning\Tests\Functional;
+namespace LongRunning\Core\Functional;
 
 use LongRunning\Core\DelegatingCleaner;
-use LongRunning\Core\Functional\CleanerOne;
-use LongRunning\Core\Functional\CleanerTwo;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class LongRunningExtensionTest extends KernelTestCase
 {
     private DelegatingCleaner $cleaner;
+
+    protected static function getKernelClass() : string
+    {
+        return TestKernel::class;
+    }
 
     protected function setUp(): void
     {

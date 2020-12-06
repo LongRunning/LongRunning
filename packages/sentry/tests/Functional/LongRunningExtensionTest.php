@@ -3,14 +3,17 @@
 namespace LongRunning\Sentry\Functional;
 
 use LongRunning\Core\DelegatingCleaner;
-use LongRunning\DoctrineORM\Cleaner\ClearEntityManagers;
-use LongRunning\DoctrineORM\Cleaner\ResetClosedEntityManagers;
 use LongRunning\Sentry\Cleaner\FlushSentryErrors;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class LongRunningExtensionTest extends KernelTestCase
 {
     private DelegatingCleaner $cleaner;
+
+    protected static function getKernelClass() : string
+    {
+        return TestKernel::class;
+    }
 
     protected function setUp(): void
     {

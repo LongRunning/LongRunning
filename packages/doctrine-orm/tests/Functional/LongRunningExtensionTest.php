@@ -11,6 +11,11 @@ final class LongRunningExtensionTest extends KernelTestCase
 {
     private DelegatingCleaner $cleaner;
 
+    protected static function getKernelClass() : string
+    {
+        return TestKernel::class;
+    }
+
     protected function setUp(): void
     {
         self::bootKernel();
