@@ -6,6 +6,6 @@
         </testsuite>
     </testsuites>
     <php>
-        <server name="KERNEL_CLASS" value="LongRunning\Sentry\Functional\TestKernel"/>
+        <server name="SHELL_VERBOSITY" value="-1"/>
     </php>
 </phpunit>

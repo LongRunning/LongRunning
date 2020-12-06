@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    processIsolation="true"
+    stopOnFailure="false"
+    failOnWarning="true">
+    <testsuite name="all">
+        <directory>packages/**/tests</directory>
+    </testsuite>
+    <php>
+        <server name="SHELL_VERBOSITY" value="-1"/>
+    </php>
+</phpunit>
