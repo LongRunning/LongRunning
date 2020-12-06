@@ -14,7 +14,6 @@ jobs:
                 with:
                     php-version: 7.4
                     coverage: none
-                    tools: composer:v2
             -   run: composer install --no-progress --ansi
             -   run: vendor/bin/monorepo-builder validate
             -   id: set-packages
@@ -39,7 +38,6 @@ jobs:
                 with:
                     php-version: ${{ matrix.php-version }}
                     coverage: none
-                    tools: composer:v2
             -   run: composer install --no-progress --ansi
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
             -   run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }}
