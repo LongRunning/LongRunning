@@ -17,11 +17,8 @@ jobs:
             -   run: composer install --no-progress --ansi
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
-            -   id: set-php-version
-                run: echo "::set-output name=php-version::$(vendor/bin/easy-ci php-versions-json)"
         outputs:
             packages: ${{ steps.set-packages.outputs.packages }}
-            php-version: ${{ steps.set-php-version.outputs.php-version }}
 
     split:
         needs: build-matrix
@@ -29,7 +26,6 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php-version: ${{ fromJson(needs.build-matrix.outputs.php-version) }}
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
         steps:
             -   uses: actions/checkout@v2
