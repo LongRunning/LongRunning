@@ -44,3 +44,13 @@ jobs:
             -   name: Split Tests of ${{ matrix.package }}
                 working-directory: packages/${{ matrix.package }}
                 run: vendor/bin/phpunit
+
+    php-cs-fixer:
+        name: PHP-CS-Fixer
+        runs-on: ubuntu-20.04
+        steps:
+            -   uses: actions/checkout@v2
+            -   name: PHP-CS-Fixer
+                uses: docker://oskarstark/php-cs-fixer-ga
+                with:
+                    args: --ansi --diff --dry-run
