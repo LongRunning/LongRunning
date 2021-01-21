@@ -4,6 +4,7 @@ namespace LongRunning\Sentry\Cleaner;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
+use Sentry\ClientInterface;
 use Sentry\FlushableClientInterface;
 
 final class FlushSentryErrorsTest extends TestCase
@@ -16,7 +17,7 @@ final class FlushSentryErrorsTest extends TestCase
         $logger = new TestLogger();
 
         $sentry = $this
-            ->getMockBuilder(FlushableClientInterface::class)
+            ->getMockBuilder(ClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
