@@ -25,7 +25,7 @@ final class FlushSentryErrorsTest extends TestCase
             ->expects($this->once())
             ->method('flush');
 
-        $cleaner = new FlushSentryErrors($sentry,  $logger);
+        $cleaner = new FlushSentryErrors($sentry, $logger);
         $cleaner->cleanUp();
 
         $this->assertTrue($logger->hasDebug('Flush sentry errors'));
