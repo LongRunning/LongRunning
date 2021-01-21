@@ -3,7 +3,7 @@ name: Tests
 on: [ push ]
 
 env:
-    COMPOSER_ROOT_VERSION: "dev-master"
+    COMPOSER_ROOT_VERSION: "dev-main"
 
 jobs:
     build-matrix:
