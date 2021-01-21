@@ -5,12 +5,13 @@ namespace LongRunning\Core\Functional;
 use LongRunning\Core\Bundle\LongRunningBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
 final class TestKernel extends Kernel
 {
     /**
-     * @inheritDoc
+     * @return BundleInterface[]
      */
     public function registerBundles() : array
     {
@@ -20,7 +21,7 @@ final class TestKernel extends Kernel
         ];
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader) : void
     {
         $loader->load(__DIR__ . '/config.php');
     }

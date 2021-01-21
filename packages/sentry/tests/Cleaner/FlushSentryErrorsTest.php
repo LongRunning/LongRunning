@@ -12,7 +12,7 @@ final class FlushSentryErrorsTest extends TestCase
     /**
      * @test
      */
-    public function it_test_if_handlers_get_cleared()
+    public function it_test_if_handlers_get_cleared() : void
     {
         $logger = new TestLogger();
 
