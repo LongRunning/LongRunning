@@ -10,6 +10,5 @@ final class CleanerTwo implements Cleaner
 {
     public function cleanUp() : void
     {
-
     }
 }

@@ -14,7 +14,8 @@ return function (ContainerConfigurator $container) {
                 'memory' => true,
             ],
             'orm' => null,
-        ]);
+        ]
+    );
 
     $container->services()->alias('public_cleaner', DelegatingCleaner::class)->public();
 };
