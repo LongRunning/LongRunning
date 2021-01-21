@@ -50,10 +50,11 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v2
-            -   name: PHP-CS-Fixer
-                uses: docker://oskarstark/php-cs-fixer-ga
+            -   uses: shivammathur/setup-php@v2
                 with:
-                    args: --ansi --diff --dry-run
+                    coverage: none
+            -   run: composer install --no-progress --ansi
+            -   run: vendor/bin/php-cs-fixer fix --ansi --diff --dry-run
 
     phpstan:
         name: PHPStan
