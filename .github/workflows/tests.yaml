@@ -54,3 +54,14 @@ jobs:
                 uses: docker://oskarstark/php-cs-fixer-ga
                 with:
                     args: --ansi --diff --dry-run
+
+    phpstan:
+        name: PHPStan
+        runs-on: ubuntu-20.04
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    coverage: none
+            -   run: composer install --no-progress --ansi
+            -   run: vendor/bin/phpstan analyse --ansi
