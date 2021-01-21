@@ -18,8 +18,8 @@ final class ResetClosedEntityManagersTest extends TestCase
     public function it_resets_entity_managers() : void
     {
         $managers = [
-            'default' => $this->getEntityManager(EntityManager::class),
-            'second'  => $this->getEntityManager(EntityManager::class),
+            'default' => $this->getEntityManager(),
+            'second'  => $this->getEntityManager(),
         ];
 
         $registry = $this->createMock(ManagerRegistry::class);
@@ -55,8 +55,8 @@ final class ResetClosedEntityManagersTest extends TestCase
     public function it_resets_entity_manager_interfase() : void
     {
         $managers = [
-            'default' => $this->getEntityManager(EntityManagerInterface::class),
-            'second'  => $this->getEntityManager(EntityManagerInterface::class),
+            'default' => $this->getEntityManagerInterface(),
+            'second'  => $this->getEntityManagerInterface(),
         ];
 
         $registry = $this->createMock(ManagerRegistry::class);
@@ -111,9 +111,26 @@ final class ResetClosedEntityManagersTest extends TestCase
     /***
      * @return EntityManager|EntityManagerInterface|MockObject
      */
-    private function getEntityManager(string $entityManagerClass) : MockObject
+    private function getEntityManager() : MockObject
     {
-        $manager = $this->getMockBuilder($entityManagerClass)
+        $manager = $this->getMockBuilder(EntityManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $manager
+            ->expects($this->once())
+            ->method('isOpen')
+            ->willReturn(false);
+
+        return $manager;
+    }
+
+    /***
+     * @return EntityManagerInterface|MockObject
+     */
+    private function getEntityManagerInterface() : MockObject
+    {
+        $manager = $this->getMockBuilder(EntityManagerInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 

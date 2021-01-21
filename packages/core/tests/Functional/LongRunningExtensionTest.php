@@ -4,6 +4,7 @@ namespace LongRunning\Core\Functional;
 
 use LongRunning\Core\DelegatingCleaner;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Webmozart\Assert\Assert;
 
 final class LongRunningExtensionTest extends KernelTestCase
 {
@@ -18,7 +19,11 @@ final class LongRunningExtensionTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $this->cleaner = self::$container->get('public_cleaner');
+        $cleaner = self::$container->get('public_cleaner');
+
+        assert($cleaner instanceof DelegatingCleaner);
+
+        $this->cleaner = $cleaner;
     }
 
     /**

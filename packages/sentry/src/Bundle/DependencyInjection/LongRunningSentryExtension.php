@@ -9,6 +9,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class LongRunningSentryExtension extends Extension
 {
+    /**
+     * @param array<mixed> $configs
+     */
     public function load(array $configs, ContainerBuilder $container) : void
     {
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));

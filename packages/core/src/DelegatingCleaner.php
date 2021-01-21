@@ -9,6 +9,9 @@ final class DelegatingCleaner implements Cleaner
      */
     private iterable $cleaners;
 
+    /**
+     * @param iterable<Cleaner> $cleaners
+     */
     public function __construct(iterable $cleaners)
     {
         $this->cleaners = $cleaners;
