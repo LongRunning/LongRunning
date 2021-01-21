@@ -1,0 +1,15 @@
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+
+parameters:
+    level: 8
+    paths:
+        - packages
+    excludePaths:
+        - packages/core/vendor
+        - packages/core/var
+        - packages/doctrine-orm/vendor
+        - packages/doctrine-orm/var
+        - packages/sentry/vendor
+        - packages/sentry/var
