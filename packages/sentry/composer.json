@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "long-running/core": "dev-main",
+        "long-running/core": "^1.0",
         "psr/log": "^1.0.1",
         "sentry/sdk": "^3.1"
     },

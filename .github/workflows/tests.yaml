@@ -39,6 +39,7 @@ jobs:
                     php-version: ${{ matrix.php-version }}
                     coverage: none
             -   run: composer install --no-progress --ansi
+            -   run: vendor/bin/monorepo-builder bump-interdependency dev-main
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
             -   run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }}
             -   name: Split Tests of ${{ matrix.package }}
