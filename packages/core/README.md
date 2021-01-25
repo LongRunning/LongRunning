@@ -30,7 +30,7 @@ return [
 
 final class MyCleaner implements \LongRunning\Core
 {
-    public function cleanUp()
+    public function cleanUp() : void
     {
         echo "Cleaned!"
     }
