@@ -26,6 +26,9 @@
         "phpunit/phpunit": "^8.5.12",
         "symfony/framework-bundle": "^4.4 || ^5.1"
     },
+    "conflict": {
+        "long-running/long-running": "*"
+    },
     "autoload": {
         "psr-4": {
             "LongRunning\\Core\\": "src"
