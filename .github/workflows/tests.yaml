@@ -54,6 +54,9 @@ jobs:
             -   uses: shivammathur/setup-php@v2
                 with:
                     coverage: none
+                    # PHP CS Fixer is not able run on PHP 8.0.0 due to bug in PHP tokenizer (https://bugs.php.net/bug.php?id=80462).
+                    # Somehow setup-php doesn't install the latest PHP when picking 8.0
+                    php-version: 7.4
             -   run: composer install --no-progress --ansi
             -   run: vendor/bin/php-cs-fixer fix --ansi --diff --dry-run
 
