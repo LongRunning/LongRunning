@@ -4,7 +4,7 @@ use LongRunning\Core\DelegatingCleaner;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return function (ContainerConfigurator $container) {
-    $container->extension('framework', ['test' => null]);
+    $container->extension('framework', ['test' => null, 'secret' => 'secret']);
     $container->extension(
         'doctrine',
         [
