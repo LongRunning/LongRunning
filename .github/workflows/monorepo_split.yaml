@@ -14,7 +14,8 @@ jobs:
                 with:
                     php-version: 7.4
                     coverage: none
-            -   run: composer install --no-progress --ansi
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
         outputs:

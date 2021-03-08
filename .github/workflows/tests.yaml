@@ -14,7 +14,8 @@ jobs:
                 with:
                     php-version: 7.4
                     coverage: none
-            -   run: composer install --no-progress --ansi
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
             -   run: vendor/bin/monorepo-builder validate
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
@@ -23,7 +24,6 @@ jobs:
         outputs:
             packages: ${{ steps.set-packages.outputs.packages }}
             php-version: ${{ steps.set-php-version.outputs.php-version }}
-
     tests:
         needs: build-matrix
         runs-on: ubuntu-20.04
@@ -32,16 +32,22 @@ jobs:
             matrix:
                 php-version: ${{ fromJson(needs.build-matrix.outputs.php-version) }}
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
+                dependencies: ['lowest', 'highest']
         steps:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php-version }}
                     coverage: none
-            -   run: composer install --no-progress --ansi
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
             -   run: vendor/bin/monorepo-builder bump-interdependency dev-main
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
-            -   run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }}
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
+                with:
+                    dependency-versions: ${{ matrix.dependencies }}
+                    working-directory: packages/${{ matrix.package }}
             -   name: Split Tests of ${{ matrix.package }}
                 working-directory: packages/${{ matrix.package }}
                 run: vendor/bin/phpunit
@@ -57,7 +63,8 @@ jobs:
                     # PHP CS Fixer is not able run on PHP 8.0.0 due to bug in PHP tokenizer (https://bugs.php.net/bug.php?id=80462).
                     # Somehow setup-php doesn't install the latest PHP when picking 8.0
                     php-version: 7.4
-            -   run: composer install --no-progress --ansi
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
             -   run: vendor/bin/php-cs-fixer fix --ansi --diff --dry-run
 
     phpstan:
@@ -68,5 +75,6 @@ jobs:
             -   uses: shivammathur/setup-php@v2
                 with:
                     coverage: none
-            -   run: composer install --no-progress --ansi
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
             -   run: vendor/bin/phpstan analyse --ansi
