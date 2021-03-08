@@ -33,7 +33,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "doctrine/orm": "^2.7",
-        "psr/log": "^1.0.1",
+        "psr/log": "^1.1.0",
         "sentry/sdk": "^3.1"
     },
     "require-dev": {
