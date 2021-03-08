@@ -1,0 +1,14 @@
+services:
+    LongRunning\DoctrineORM\Cleaner\ClearEntityManagers:
+        arguments:
+            $managerRegistry: '@doctrine'
+            $logger: '@Psr\Log\LoggerInterface'
+        tags:
+            - { name: 'long_running.cleaner' }
+
+    LongRunning\DoctrineORM\Cleaner\ResetClosedEntityManagers:
+        arguments:
+            $managerRegistry: '@doctrine'
+            $logger: '@Psr\Log\LoggerInterface'
+        tags:
+            - { name: 'long_running.cleaner' }
