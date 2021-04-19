@@ -30,7 +30,7 @@ jobs:
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
         steps:
             -   uses: actions/checkout@v2
-            -   uses: TomasVotruba/github-action-monorepo-split@1.1
+            -   uses: TomasVotruba/github-action-monorepo-split@2.0
                 env:
                     GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
                 with:
