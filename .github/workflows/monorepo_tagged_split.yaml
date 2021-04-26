@@ -40,7 +40,7 @@ jobs:
             # see https://github.com/WyriHaximus/github-action-get-previous-tag
             -
                 id: previous_tag
-                uses: "WyriHaximus/github-action-get-previous-tag@v1.0.1"
+                uses: "WyriHaximus/github-action-get-previous-tag@v1.1"
 
             -   uses: TomasVotruba/github-action-monorepo-split@2.0
                 env:
