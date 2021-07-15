@@ -10,7 +10,7 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v2.3.4
-            -   uses: shivammathur/setup-php@2.11.0
+            -   uses: shivammathur/setup-php@2.12.0
                 with:
                     php-version: 7.4
                     coverage: none
@@ -35,7 +35,7 @@ jobs:
                 dependencies: ['lowest', 'highest']
         steps:
             -   uses: actions/checkout@v2.3.4
-            -   uses: shivammathur/setup-php@2.11.0
+            -   uses: shivammathur/setup-php@2.12.0
                 with:
                     php-version: ${{ matrix.php-version }}
                     coverage: none
@@ -57,7 +57,7 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v2.3.4
-            -   uses: shivammathur/setup-php@2.11.0
+            -   uses: shivammathur/setup-php@2.12.0
                 with:
                     coverage: none
                     # PHP CS Fixer is not able run on PHP 8.0.0 due to bug in PHP tokenizer (https://bugs.php.net/bug.php?id=80462).
@@ -72,7 +72,7 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v2.3.4
-            -   uses: shivammathur/setup-php@2.11.0
+            -   uses: shivammathur/setup-php@2.12.0
                 with:
                     coverage: none
             -   name: Install dependencies
