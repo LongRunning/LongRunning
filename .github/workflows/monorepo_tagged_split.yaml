@@ -10,7 +10,7 @@ jobs:
     build-matrix:
         runs-on: ubuntu-20.04
         steps:
-            -   uses: actions/checkout@v2.3.4
+            -   uses: actions/checkout@v2.4.0
             -   uses: shivammathur/setup-php@2.15.0
                 with:
                     php-version: 7.4
@@ -31,7 +31,7 @@ jobs:
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
         steps:
             -
-                uses: actions/checkout@v2.3.4
+                uses: actions/checkout@v2.4.0
                 # this is required for "WyriHaximus/github-action-get-previous-tag" workflow
                 # see https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches
                 with:
