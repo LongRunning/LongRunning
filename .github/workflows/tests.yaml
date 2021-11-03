@@ -9,7 +9,7 @@ jobs:
     build-matrix:
         runs-on: ubuntu-20.04
         steps:
-            -   uses: actions/checkout@v2.3.4
+            -   uses: actions/checkout@v2.4.0
             -   uses: shivammathur/setup-php@2.15.0
                 with:
                     php-version: 7.4
@@ -34,7 +34,7 @@ jobs:
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
                 dependencies: ['lowest', 'highest']
         steps:
-            -   uses: actions/checkout@v2.3.4
+            -   uses: actions/checkout@v2.4.0
             -   uses: shivammathur/setup-php@2.15.0
                 with:
                     php-version: ${{ matrix.php-version }}
@@ -56,7 +56,7 @@ jobs:
         name: PHP-CS-Fixer
         runs-on: ubuntu-20.04
         steps:
-            -   uses: actions/checkout@v2.3.4
+            -   uses: actions/checkout@v2.4.0
             -   uses: shivammathur/setup-php@2.15.0
                 with:
                     coverage: none
@@ -71,7 +71,7 @@ jobs:
         name: PHPStan
         runs-on: ubuntu-20.04
         steps:
-            -   uses: actions/checkout@v2.3.4
+            -   uses: actions/checkout@v2.4.0
             -   uses: shivammathur/setup-php@2.15.0
                 with:
                     coverage: none
