@@ -28,12 +28,10 @@ final class ResetClosedEntityManagersTest extends TestCase
             ->method('getManagers')
             ->willReturn($managers);
 
-        foreach (array_keys($managers) as $count => $name) {
-            $registry
-                ->expects($this->at($count + 1))
-                ->method('resetManager')
-                ->with($name);
-        }
+        $registry
+            ->expects($this->exactly(count($managers)))
+            ->method('resetManager')
+            ->withConsecutive(...array_map(function ($manager) { return [$manager]; }, array_keys($managers)));
 
         $logger = new TestLogger();
         $cleaner = new ResetClosedEntityManagers($registry, $logger);
@@ -65,12 +63,10 @@ final class ResetClosedEntityManagersTest extends TestCase
             ->method('getManagers')
             ->willReturn($managers);
 
-        foreach (array_keys($managers) as $count => $name) {
-            $registry
-                ->expects($this->at($count + 1))
-                ->method('resetManager')
-                ->with($name);
-        }
+        $registry
+            ->expects($this->exactly(count($managers)))
+            ->method('resetManager')
+            ->withConsecutive(...array_map(function ($manager) { return [$manager]; }, array_keys($managers)));
 
         $logger = new TestLogger();
         $cleaner = new ResetClosedEntityManagers($registry, $logger);
