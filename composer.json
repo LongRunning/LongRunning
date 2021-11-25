@@ -45,7 +45,7 @@
         "phpstan/phpstan-symfony": "^1.0",
         "phpunit/phpunit": "^9.5.10",
         "sentry/sentry-symfony": "^4.0",
-        "symfony/framework-bundle": "^4.4.12 || ^5.3",
+        "symfony/framework-bundle": "^4.4.12 || ^5.3.7",
         "symplify/easy-ci": "^9.0",
         "symplify/monorepo-builder": "^9.0",
         "symfony/phpunit-bridge": "^4.4.30 || ^5.3.7"

@@ -136,12 +136,11 @@ final class RebuildSymfonyRequirementsCommand extends Command
                 }
 
                 if (isset($conflicts[$packageName])) {
-                    $output->writeln(sprintf('There is already a conflict rule for package %s', $packageName));
-
-                    continue;
+                    $conflicts[$packageName] .= ' || ' . $conflict;
+                    $output->writeln(sprintf('Extending conflict for %s with "%s"', $packageName, $conflicts[$packageName]));
+                } else {
+                    $conflicts[$packageName] = $conflict;
                 }
-
-                $conflicts[$packageName] = $conflict;
             }
         }
 
