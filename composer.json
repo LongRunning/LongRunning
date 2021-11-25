@@ -25,7 +25,6 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LongRunning\\CI\\": "src",
             "LongRunning\\Core\\": "packages/core/tests",
             "LongRunning\\DoctrineORM\\": "packages/doctrine-orm/tests",
             "LongRunning\\Sentry\\": "packages/sentry/tests"

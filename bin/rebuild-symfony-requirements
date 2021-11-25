@@ -1,11 +1,12 @@
+#!/usr/bin/env php
 <?php
 
-namespace LongRunning\CI\Command;
+require __DIR__ . '/../vendor/autoload.php';
 
+use Symfony\Component\Console\Application;
 use Composer\Semver\Constraint\ConstraintInterface;
 use Composer\Semver\Constraint\MultiConstraint;
 use Composer\Semver\VersionParser;
-use LogicException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,12 +15,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class RebuildSymfonyRequirementsCommand extends Command
 {
+    private const SYMFONY_VERSIONS = 'https://raw.githubusercontent.com/symfony/recipes/master/.github/versions.json';
     private const PACKAGE = 'package';
     private const VERSION = 'version';
     private const DRY_RUN = 'dry-run';
-    private const IGNORED_PACKAGES = ['symfony/monolog-bundle'];
 
     private VersionParser $versionParser;
+
+    /**
+     * @var array<string, array<int, string>>
+     */
+    private array $symfonySplitPackages;
 
     public function __construct()
     {
@@ -28,7 +34,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
         $this->versionParser = new VersionParser();
     }
 
-    protected function configure(): void
+    protected function configure() : void
     {
         $this->setName('rebuild-symfony-requirements');
         $this->addArgument(
@@ -46,7 +52,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $package = $input->getArgument(self::PACKAGE);
         $newVersion = $input->getArgument(self::VERSION);
@@ -60,7 +66,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
             throw new LogicException('Version argument should be a string');
         }
 
-        $path = __DIR__.'/../../packages/'.$package.'/composer.json';
+        $path = __DIR__ . '/../packages/' . $package . '/composer.json';
 
         if (false === $content = file_get_contents($path)) {
             throw new LogicException('composer.json content could not be read');
@@ -73,18 +79,80 @@ final class RebuildSymfonyRequirementsCommand extends Command
             JSON_THROW_ON_ERROR
         );
 
-        $content['require'] = $this->replace($content['require'], $newVersion);
-        $content['require-dev'] = $this->replace($content['require-dev'], $newVersion);
+        if (!$this->fetchSymfonySplitPackages($output)) {
+            return self::FAILURE;
+        }
+
+        $content['require'] = $this->replace($output, $content['require'], $newVersion);
+        $content['require-dev'] = $this->replace($output, $content['require-dev'], $newVersion);
+
+        $content['conflict'] = $this->getSymfonyConflicts($output, $content['conflict'] ?? [], $newVersion);
 
         $json = json_encode($content, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         if ($dryRun) {
             $output->writeln($json);
+
             return self::SUCCESS;
         }
 
-        file_put_contents($path, $json.PHP_EOL);
+        file_put_contents($path, $json . PHP_EOL);
 
         return self::SUCCESS;
+    }
+
+    private function fetchSymfonySplitPackages(OutputInterface $output) : bool
+    {
+        $json = file_get_contents(self::SYMFONY_VERSIONS);
+        if (false === $json) {
+            $output->writeln(sprintf('Could not download Symfony versions from %s', self::SYMFONY_VERSIONS));
+
+            return false;
+        }
+
+        $this->symfonySplitPackages = json_decode($json, true, 512, JSON_THROW_ON_ERROR)['splits'];
+
+        return true;
+    }
+
+    /**
+     * @param array<string, string> $conflicts
+     *
+     * @return array<string, string>
+     */
+    private function getSymfonyConflicts(OutputInterface $output, array $conflicts, string $newVersion) : array
+    {
+        $newVersionConstraint = $this->versionParser->parseConstraints($newVersion);
+        $conflict = sprintf(
+            '<%s || >=%s',
+            $this->normalizeVersion($newVersionConstraint->getLowerBound()->getVersion()),
+            $this->normalizeVersion($newVersionConstraint->getUpperBound()->getVersion())
+        );
+
+        foreach ($this->symfonySplitPackages as $packageName => $versions) {
+            foreach ($versions as $version) {
+                $constraints = $this->versionParser->parseConstraints($version);
+                if (!$constraints->matches($newVersionConstraint)) {
+                    continue;
+                }
+
+                if (isset($conflicts[$packageName])) {
+                    $output->writeln(sprintf('There is already a conflict rule for package %s', $packageName));
+
+                    continue;
+                }
+
+                $conflicts[$packageName] = $conflict;
+            }
+        }
+
+        $output->writeln(sprintf('Conflict with Symfony split packages "%s"', $conflict));
+
+        return $conflicts;
+    }
+
+    private function normalizeVersion(string $version) : string
+    {
+        return str_replace('.0-dev', '', $version);
     }
 
     /**
@@ -92,7 +160,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
      *
      * @return array<string, string>
      */
-    private function replace(array $require, string $newVersion): array
+    private function replace(OutputInterface $output, array $require, string $newVersion) : array
     {
         $newVersionConstraint = $this->versionParser->parseConstraints($newVersion);
 
@@ -101,15 +169,15 @@ final class RebuildSymfonyRequirementsCommand extends Command
                 continue;
             }
 
-            if (in_array($package, self::IGNORED_PACKAGES, true)) {
+            if (!array_key_exists($package, $this->symfonySplitPackages)) {
                 continue;
             }
 
             $constraints = $this->versionParser->parseConstraints($version);
             $newConstraint = $this->matches($constraints, $newVersionConstraint, $version, $newVersion);
-            $newVersion = sprintf('^%s', $newConstraint->getLowerBound()->getVersion());
+            $newVersion = sprintf('^%s', $this->normalizeVersion($newConstraint->getLowerBound()->getVersion()));
 
-            echo sprintf("Change %s \"%s\" to \"%s\"\n", $package, $version, $newVersion);
+            $output->writeln(sprintf('Change %s "%s" to "%s"', $package, $version, $newVersion));
 
             $require[$package] = $newVersion;
         }
@@ -122,7 +190,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
         ConstraintInterface $provider,
         string $version,
         string $newVersion
-    ): ConstraintInterface {
+    ) : ConstraintInterface {
         if (!$multi instanceof MultiConstraint) {
             throw new LogicException(sprintf('The constraint is not a %s', MultiConstraint::class));
         }
@@ -146,3 +214,8 @@ final class RebuildSymfonyRequirementsCommand extends Command
         return $provider;
     }
 }
+
+$application = new Application('rebuild-symfony-requirements', '1.0.0');
+$application->add(new RebuildSymfonyRequirementsCommand());
+$application->setDefaultCommand('rebuild-symfony-requirements', true);
+$application->run();
