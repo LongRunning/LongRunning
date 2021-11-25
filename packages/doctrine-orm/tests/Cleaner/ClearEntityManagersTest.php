@@ -13,11 +13,11 @@ final class ClearEntityManagersTest extends TestCase
     /**
      * @test
      */
-    public function it_clears_all_object_managers() : void
+    public function it_clears_all_object_managers(): void
     {
         $managers = [
             'default' => $this->getManager(),
-            'second'  => $this->getManager(),
+            'second' => $this->getManager(),
         ];
 
         $registry = $this->createMock(ManagerRegistry::class);
@@ -26,7 +26,7 @@ final class ClearEntityManagersTest extends TestCase
             ->method('getManagers')
             ->willReturn($managers);
 
-        $logger  = new TestLogger();
+        $logger = new TestLogger();
         $cleaner = new ClearEntityManagers($registry, $logger);
         $cleaner->cleanUp();
 
@@ -43,7 +43,7 @@ final class ClearEntityManagersTest extends TestCase
     /**
      * @return MockObject|ObjectManager
      */
-    private function getManager() : MockObject
+    private function getManager(): MockObject
     {
         $manager = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()

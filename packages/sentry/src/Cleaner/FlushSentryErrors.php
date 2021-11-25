@@ -17,7 +17,7 @@ final class FlushSentryErrors implements Cleaner
         $this->logger = $logger;
     }
 
-    public function cleanUp() : void
+    public function cleanUp(): void
     {
         $this->logger->debug('Flush sentry errors');
         $this->sentry->flush();

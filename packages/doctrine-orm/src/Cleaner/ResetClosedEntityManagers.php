@@ -2,9 +2,9 @@
 
 namespace LongRunning\DoctrineORM\Cleaner;
 
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use LongRunning\Core\Cleaner;
 use Psr\Log\LoggerInterface;
 
@@ -17,10 +17,10 @@ final class ResetClosedEntityManagers implements Cleaner
     public function __construct(ManagerRegistry $managerRegistry, LoggerInterface $logger)
     {
         $this->managerRegistry = $managerRegistry;
-        $this->logger          = $logger;
+        $this->logger = $logger;
     }
 
-    public function cleanUp() : void
+    public function cleanUp(): void
     {
         foreach ($this->managerRegistry->getManagers() as $name => $manager) {
             if (!$manager instanceof EntityManager && !$manager instanceof EntityManagerInterface) {

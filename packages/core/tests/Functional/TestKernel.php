@@ -3,8 +3,8 @@
 namespace LongRunning\Core\Functional;
 
 use LongRunning\Core\Bundle\LongRunningBundle;
-use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -13,7 +13,7 @@ final class TestKernel extends Kernel
     /**
      * @return BundleInterface[]
      */
-    public function registerBundles() : array
+    public function registerBundles(): array
     {
         return [
             new LongRunningBundle(),
@@ -21,8 +21,8 @@ final class TestKernel extends Kernel
         ];
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader) : void
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
-        $loader->load(__DIR__ . '/config.php');
+        $loader->load(__DIR__.'/config.php');
     }
 }

@@ -17,7 +17,7 @@ final class DelegatingCleaner implements Cleaner
         $this->cleaners = $cleaners;
     }
 
-    public function cleanUp() : void
+    public function cleanUp(): void
     {
         foreach ($this->cleaners as $cleaner) {
             $cleaner->cleanUp();

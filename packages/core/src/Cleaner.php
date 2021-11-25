@@ -4,5 +4,5 @@ namespace LongRunning\Core;
 
 interface Cleaner
 {
-    public function cleanUp() : void;
+    public function cleanUp(): void;
 }

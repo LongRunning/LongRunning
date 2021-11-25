@@ -39,7 +39,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.0.10",
-        "friendsofphp/php-cs-fixer": "^2.18",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "phpstan/phpstan": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
         "phpstan/phpstan-symfony": "^1.0",
@@ -56,5 +56,10 @@
         "long-running/sentry": "self.version"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "cs": "vendor/bin/php-cs-fixer fix",
+        "phpstan": "vendor/bin/phpstan",
+        "tests": "vendor/bin/phpunit"
+    }
 }

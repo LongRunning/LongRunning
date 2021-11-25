@@ -4,16 +4,10 @@ namespace LongRunning\Core\Functional;
 
 use LongRunning\Core\DelegatingCleaner;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Webmozart\Assert\Assert;
 
 final class LongRunningExtensionTest extends KernelTestCase
 {
     private DelegatingCleaner $cleaner;
-
-    protected static function getKernelClass() : string
-    {
-        return TestKernel::class;
-    }
 
     protected function setUp(): void
     {
@@ -29,7 +23,7 @@ final class LongRunningExtensionTest extends KernelTestCase
     /**
      * @test
      */
-    public function it_automatically_enables_plugins() : void
+    public function it_automatically_enables_plugins(): void
     {
         $reflectionObject = new \ReflectionObject($this->cleaner);
         $property = $reflectionObject->getProperty('cleaners');
@@ -39,11 +33,16 @@ final class LongRunningExtensionTest extends KernelTestCase
 
         $expectedCleaners = [
             CleanerOne::class,
-            CleanerTwo::class
+            CleanerTwo::class,
         ];
 
         $this->assertEquals($expectedCleaners, array_map('get_class', $cleaners));
 
         $this->cleaner->cleanUp();
+    }
+
+    protected static function getKernelClass(): string
+    {
+        return TestKernel::class;
     }
 }
