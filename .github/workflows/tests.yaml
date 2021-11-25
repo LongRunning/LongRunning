@@ -49,7 +49,7 @@ jobs:
             -   name: Install dependencies
                 uses: ramsey/composer-install@1.3.0
             -   run: vendor/bin/monorepo-builder bump-interdependency dev-main
-            -   run: bin/console rebuild-symfony-requirements ${{ matrix.package }} "${{ matrix.symfony-version }}"
+            -   run: bin/rebuild-symfony-requirements ${{ matrix.package }} "${{ matrix.symfony-version }}"
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
             -   name: Install dependencies
                 uses: ramsey/composer-install@1.3.0
