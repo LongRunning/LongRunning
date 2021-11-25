@@ -43,7 +43,7 @@
         "phpstan/phpstan": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
         "phpstan/phpstan-symfony": "^1.0",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^9.5.10",
         "sentry/sentry-symfony": "^4.0",
         "symfony/framework-bundle": "^4.4.12 || ^5.1",
         "symplify/easy-ci": "^9.0",
