@@ -1,0 +1,11 @@
+#!/usr/bin/env php
+<?php
+
+use LongRunning\CI\Command\RebuildSymfonyRequirementsCommand;
+use Symfony\Component\Console\Application;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$application = new Application('simple-bus-ci-helper', '1.0.0');
+$application->add(new RebuildSymfonyRequirementsCommand());
+$application->run();

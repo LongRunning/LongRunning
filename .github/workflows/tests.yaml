@@ -33,7 +33,12 @@ jobs:
             matrix:
                 php-version: ${{ fromJson(needs.build-matrix.outputs.php-version) }}
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
-                dependencies: ['lowest', 'highest']
+                symfony-version:
+                    - '4.4.*'
+                    - '5.3.*'
+                dependencies:
+                    - 'lowest'
+                    - 'highest'
         steps:
             -   uses: actions/checkout@v2.4.0
             -   uses: shivammathur/setup-php@2.15.0
@@ -44,6 +49,7 @@ jobs:
             -   name: Install dependencies
                 uses: ramsey/composer-install@1.3.0
             -   run: vendor/bin/monorepo-builder bump-interdependency dev-main
+            -   run: bin/console rebuild-symfony-requirements ${{ matrix.package }} "${{ matrix.symfony-version }}"
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
             -   name: Install dependencies
                 uses: ramsey/composer-install@1.3.0

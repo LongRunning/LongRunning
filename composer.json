@@ -25,6 +25,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "LongRunning\\CI\\": "src",
             "LongRunning\\Core\\": "packages/core/tests",
             "LongRunning\\DoctrineORM\\": "packages/doctrine-orm/tests",
             "LongRunning\\Sentry\\": "packages/sentry/tests"
@@ -35,7 +36,7 @@
         "doctrine/orm": "^2.7",
         "psr/log": "^1.1.0",
         "sentry/sdk": "^3.1",
-        "symfony/yaml": "^4.4 || ^5.1"
+        "symfony/yaml": "^4.4 || ^5.3"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.0.10",
@@ -45,7 +46,7 @@
         "phpstan/phpstan-symfony": "^1.0",
         "phpunit/phpunit": "^9.5.10",
         "sentry/sentry-symfony": "^4.0",
-        "symfony/framework-bundle": "^4.4.12 || ^5.1",
+        "symfony/framework-bundle": "^4.4.12 || ^5.3",
         "symplify/easy-ci": "^9.0",
         "symplify/monorepo-builder": "^9.0"
     },
