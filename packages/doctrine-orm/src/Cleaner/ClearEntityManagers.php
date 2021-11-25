@@ -17,7 +17,7 @@ final class ClearEntityManagers implements Cleaner
         $this->logger = $logger;
     }
 
-    public function cleanUp() : void
+    public function cleanUp(): void
     {
         foreach ($this->managerRegistry->getManagers() as $name => $manager) {
             $this->logger->debug('Clear EntityManager', ['entity_manager' => $name]);

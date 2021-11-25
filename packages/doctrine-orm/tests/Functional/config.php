@@ -10,7 +10,7 @@ return function (ContainerConfigurator $container) {
         [
             'dbal' => [
                 'driver' => 'pdo_sqlite',
-                'path'   => '%kernel.project_dir%/var/data.sqlite',
+                'path' => '%kernel.project_dir%/var/data.sqlite',
                 'memory' => true,
             ],
             'orm' => null,

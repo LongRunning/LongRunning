@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class LongRunningBundle extends Bundle
 {
-    public function build(ContainerBuilder $container) : void
+    public function build(ContainerBuilder $container): void
     {
         $container->registerForAutoconfiguration(Cleaner::class)->addTag('long_running.cleaner');
     }

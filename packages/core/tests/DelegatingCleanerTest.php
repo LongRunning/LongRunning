@@ -10,7 +10,7 @@ final class DelegatingCleanerTest extends TestCase
     /**
      * @test
      */
-    public function it_tests_the_delecated_cleaners() : void
+    public function it_tests_the_delecated_cleaners(): void
     {
         $cleaner = new DelegatingCleaner([
             $this->getCleaner(),
@@ -21,9 +21,9 @@ final class DelegatingCleanerTest extends TestCase
     }
 
     /**
-     * @return MockObject|Cleaner
+     * @return Cleaner|MockObject
      */
-    private function getCleaner() : MockObject
+    private function getCleaner(): MockObject
     {
         $cleaner = $this->createMock(Cleaner::class);
         $cleaner

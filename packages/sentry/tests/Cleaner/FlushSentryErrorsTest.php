@@ -5,14 +5,13 @@ namespace LongRunning\Sentry\Cleaner;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
 use Sentry\ClientInterface;
-use Sentry\FlushableClientInterface;
 
 final class FlushSentryErrorsTest extends TestCase
 {
     /**
      * @test
      */
-    public function it_test_if_handlers_get_cleared() : void
+    public function it_test_if_handlers_get_cleared(): void
     {
         $logger = new TestLogger();
 
