@@ -8,4 +8,7 @@
     <php>
         <server name="SHELL_VERBOSITY" value="-1"/>
     </php>
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
+    </listeners>
 </phpunit>
