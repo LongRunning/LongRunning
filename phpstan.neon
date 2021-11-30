@@ -13,3 +13,5 @@ parameters:
         - packages/doctrine-orm/var
         - packages/sentry/vendor
         - packages/sentry/var
+    scanFiles:
+        - vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php
