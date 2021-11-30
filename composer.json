@@ -35,7 +35,7 @@
         "doctrine/orm": "^2.7.3",
         "psr/log": "^1.1.0",
         "sentry/sdk": "^3.1",
-        "symfony/yaml": "^5.3"
+        "symfony/yaml": "^5.3 || ^6.0"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.3.1",
@@ -45,8 +45,8 @@
         "phpstan/phpstan-symfony": "^1.0",
         "phpunit/phpunit": "^9.5.10",
         "sentry/sentry-symfony": "^4.0",
-        "symfony/framework-bundle": "^5.3.7",
-        "symfony/phpunit-bridge": "^5.3.7",
+        "symfony/framework-bundle": "^5.3.7 || ^6.0",
+        "symfony/phpunit-bridge": "^6.0",
         "symplify/easy-ci": "^9.0",
         "symplify/monorepo-builder": "^9.0"
     },

@@ -15,7 +15,7 @@ final class LongRunningExtensionTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $cleaner = self::$container->get('public_cleaner');
+        $cleaner = self::getContainer()->get('public_cleaner');
 
         assert($cleaner instanceof DelegatingCleaner);
 
