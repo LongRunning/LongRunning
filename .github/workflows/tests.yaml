@@ -23,7 +23,7 @@ jobs:
             -   id: set-php-version
                 run: echo "::set-output name=php-version::$(vendor/bin/easy-ci php-versions-json | sed 's/]$/,"8.1"]/')"
             -   id: set-symfony-version
-                run: echo '::set-output name=symfony-version::["5.3.*", "5.4.*"]'
+                run: echo '::set-output name=symfony-version::["5.3.*", "5.4.*", "6.0.*"]'
         outputs:
             packages: ${{ steps.set-packages.outputs.packages }}
             php-version: ${{ steps.set-php-version.outputs.php-version }}
