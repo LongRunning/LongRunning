@@ -81,14 +81,24 @@ jobs:
             -   run: vendor/bin/php-cs-fixer fix --ansi --diff --dry-run
 
     phpstan:
+        needs: build-matrix
         name: PHPStan
         runs-on: ubuntu-20.04
+        strategy:
+            fail-fast: false
+            matrix:
+                php-version: ${{ fromJson(needs.build-matrix.outputs.php-version) }}
+                symfony-version: ${{ fromJson(needs.build-matrix.outputs.symfony-version) }}
         steps:
             -   uses: actions/checkout@v2.4.0
             -   uses: shivammathur/setup-php@2.16.0
                 with:
+                    php-version: ${{ matrix.php-version }}
                     coverage: none
+                    tools: flex
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
             -   name: Install dependencies
                 uses: ramsey/composer-install@1.3.0
+                env:
+                    SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
             -   run: vendor/bin/phpstan analyse --ansi
