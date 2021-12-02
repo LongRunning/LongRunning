@@ -38,7 +38,7 @@ final class LongRunningExtensionTest extends KernelTestCase
             ResetClosedEntityManagers::class,
         ];
 
-        $this->assertEquals($expectedCleaners, array_map('get_class', $cleaners));
+        $this->assertSame($expectedCleaners, array_map('get_class', $cleaners));
 
         $this->cleaner->cleanUp();
     }
