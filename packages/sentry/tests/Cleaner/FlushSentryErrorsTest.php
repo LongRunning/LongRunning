@@ -3,7 +3,7 @@
 namespace LongRunning\Sentry\Cleaner;
 
 use PHPUnit\Framework\TestCase;
-use Psr\Log\Test\TestLogger;
+use Psr\Log\LoggerInterface;
 use Sentry\ClientInterface;
 
 final class FlushSentryErrorsTest extends TestCase
@@ -13,7 +13,7 @@ final class FlushSentryErrorsTest extends TestCase
      */
     public function it_test_if_handlers_get_cleared(): void
     {
-        $logger = new TestLogger();
+        $logger = $this->createMock(LoggerInterface::class);
 
         $sentry = $this
             ->getMockBuilder(ClientInterface::class)
@@ -24,9 +24,12 @@ final class FlushSentryErrorsTest extends TestCase
             ->expects($this->once())
             ->method('flush');
 
+        $logger
+            ->expects($this->once())
+            ->method('debug')
+            ->with('Flush sentry errors');
+
         $cleaner = new FlushSentryErrors($sentry, $logger);
         $cleaner->cleanUp();
-
-        $this->assertTrue($logger->hasDebug('Flush sentry errors'));
     }
 }

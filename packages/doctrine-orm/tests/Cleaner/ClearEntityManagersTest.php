@@ -6,7 +6,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\Test\TestLogger;
+use Psr\Log\LoggerInterface;
 
 final class ClearEntityManagersTest extends TestCase
 {
@@ -26,18 +26,15 @@ final class ClearEntityManagersTest extends TestCase
             ->method('getManagers')
             ->willReturn($managers);
 
-        $logger = new TestLogger();
+        $logger = $this->createMock(LoggerInterface::class);
+
+        $logger
+            ->expects($this->exactly(2))
+            ->method('debug')
+            ->with('Clear EntityManager');
+
         $cleaner = new ClearEntityManagers($registry, $logger);
         $cleaner->cleanUp();
-
-        $this->assertTrue($logger->hasDebug([
-            'message' => 'Clear EntityManager',
-            'context' => ['entity_manager' => 'default'],
-        ]));
-        $this->assertTrue($logger->hasDebug([
-            'message' => 'Clear EntityManager',
-            'context' => ['entity_manager' => 'second'],
-        ]));
     }
 
     /**
