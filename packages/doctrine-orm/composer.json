@@ -46,5 +46,11 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "ocramius/package-versions": true,
+            "composer/package-versions-deprecated": true
+        }
+    }
 }
