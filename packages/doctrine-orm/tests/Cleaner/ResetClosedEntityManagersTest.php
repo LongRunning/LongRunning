@@ -83,7 +83,7 @@ final class ResetClosedEntityManagersTest extends TestCase
     }
 
     /**
-     * @tests
+     * @test
      */
     public function it_ignores_other_object_mappers(): void
     {
@@ -107,7 +107,7 @@ final class ResetClosedEntityManagersTest extends TestCase
     // @return EntityManager|EntityManagerInterface|MockObject
     private function getEntityManager(): MockObject
     {
-        $manager = $this->getMockBuilder(EntityManager::class)
+        $manager = $this->getMockBuilder(EntityManagerInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -139,14 +139,8 @@ final class ResetClosedEntityManagersTest extends TestCase
      */
     private function getObjectManager(): MockObject
     {
-        $manager = $this->getMockBuilder(ObjectManager::class)
+        return $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
-
-        $manager
-            ->expects($this->never())
-            ->method('isOpen');
-
-        return $manager;
     }
 }
