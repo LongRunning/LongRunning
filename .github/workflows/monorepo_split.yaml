@@ -18,7 +18,7 @@ jobs:
                     coverage: none
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
             -   name: Install dependencies
-                uses: ramsey/composer-install@2.0.2
+                uses: ramsey/composer-install@2.0.4
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
         outputs:
