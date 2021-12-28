@@ -16,7 +16,7 @@ jobs:
                     coverage: none
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
             -   name: Install dependencies
-                uses: ramsey/composer-install@2.0.2
+                uses: ramsey/composer-install@2.0.4
             -   run: vendor/bin/monorepo-builder validate
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
@@ -50,13 +50,13 @@ jobs:
                     tools: flex
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
             -   name: Install dependencies
-                uses: ramsey/composer-install@2.0.2
+                uses: ramsey/composer-install@2.0.4
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
             -   run: vendor/bin/monorepo-builder bump-interdependency dev-main
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
             -   name: Install dependencies
-                uses: ramsey/composer-install@2.0.2
+                uses: ramsey/composer-install@2.0.4
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
                 with:
@@ -77,7 +77,7 @@ jobs:
                     php-version: '8.0'
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
             -   name: Install dependencies
-                uses: ramsey/composer-install@2.0.2
+                uses: ramsey/composer-install@2.0.4
             -   run: vendor/bin/php-cs-fixer fix --ansi --diff --dry-run
 
     phpstan:
@@ -98,7 +98,7 @@ jobs:
                     tools: flex
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
             -   name: Install dependencies
-                uses: ramsey/composer-install@2.0.2
+                uses: ramsey/composer-install@2.0.4
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
             -   run: vendor/bin/phpstan analyse --ansi
