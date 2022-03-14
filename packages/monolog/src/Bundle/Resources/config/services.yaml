@@ -1,0 +1,14 @@
+services:
+    LongRunning\Monolog\Cleaner\ClearFingersCrossedHandlers:
+        arguments:
+            - !tagged_iterator long_running.monolog.fingers.crossed.handlers
+            - '@Psr\Log\LoggerInterface'
+        tags:
+            - name: 'long_running.cleaner'
+
+    LongRunning\Monolog\Cleaner\CloseBufferHandlers:
+        arguments:
+            - !tagged_iterator long_running.monolog.buffer.handlers
+            - '@Psr\Log\LoggerInterface'
+        tags:
+            - name: 'long_running.cleaner'

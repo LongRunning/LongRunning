@@ -20,6 +20,7 @@
         "psr-4": {
             "LongRunning\\Core\\": "packages/core/src",
             "LongRunning\\DoctrineORM\\": "packages/doctrine-orm/src",
+            "LongRunning\\Monolog\\": "packages/monolog/src",
             "LongRunning\\Sentry\\": "packages/sentry/src"
         }
     },
@@ -27,12 +28,14 @@
         "psr-4": {
             "LongRunning\\Core\\": "packages/core/tests",
             "LongRunning\\DoctrineORM\\": "packages/doctrine-orm/tests",
+            "LongRunning\\Monolog\\": "packages/monolog/tests",
             "LongRunning\\Sentry\\": "packages/sentry/tests"
         }
     },
     "require": {
         "php": "^8.0",
         "doctrine/orm": "^2.7.3",
+        "monolog/monolog": "~1.22 || ~2.0",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
         "sentry/sdk": "^3.1",
         "symfony/yaml": "^5.4 || ^6.0"
@@ -46,6 +49,7 @@
         "phpunit/phpunit": "^9.5.10",
         "sentry/sentry-symfony": "^4.0",
         "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/monolog-bundle": "^3.4",
         "symfony/phpunit-bridge": "^6.0",
         "symplify/easy-ci": "^10.0",
         "symplify/monorepo-builder": "^10.0"
