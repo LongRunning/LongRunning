@@ -10,7 +10,7 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v3
-            -   uses: shivammathur/setup-php@2.18.0
+            -   uses: shivammathur/setup-php@2.20.0
                 with:
                     php-version: '8.0'
                     coverage: none
@@ -43,7 +43,7 @@ jobs:
                     - 'highest'
         steps:
             -   uses: actions/checkout@v3
-            -   uses: shivammathur/setup-php@2.18.0
+            -   uses: shivammathur/setup-php@2.20.0
                 with:
                     php-version: ${{ matrix.php-version }}
                     coverage: none
@@ -71,7 +71,7 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v3
-            -   uses: shivammathur/setup-php@2.18.0
+            -   uses: shivammathur/setup-php@2.20.0
                 with:
                     coverage: none
                     php-version: '8.0'
@@ -91,7 +91,7 @@ jobs:
                 symfony-version: ${{ fromJson(needs.build-matrix.outputs.symfony-version) }}
         steps:
             -   uses: actions/checkout@v3
-            -   uses: shivammathur/setup-php@2.18.0
+            -   uses: shivammathur/setup-php@2.20.0
                 with:
                     php-version: ${{ matrix.php-version }}
                     coverage: none
