@@ -34,7 +34,7 @@ jobs:
         steps:
             -   uses: actions/checkout@v3
             -   if: "!startsWith(github.ref, 'refs/tags/')"
-                uses: symplify/monorepo-split-github-action@2.1
+                uses: symplify/monorepo-split-github-action@2.2
                 env:
                     GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
                 with:
@@ -45,7 +45,7 @@ jobs:
                     user_name: longrunning-bot
                     branch: main
             -   if: "startsWith(github.ref, 'refs/tags/')"
-                uses: symplify/monorepo-split-github-action@2.1
+                uses: symplify/monorepo-split-github-action@2.2
                 env:
                     GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
                 with:
