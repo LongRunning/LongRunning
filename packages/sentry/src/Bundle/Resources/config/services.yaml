@@ -1,7 +1,0 @@
-services:
-    LongRunning\Sentry\Cleaner\FlushSentryErrors:
-        arguments:
-            $sentry: '@Sentry\ClientInterface'
-            $logger: '@Psr\Log\LoggerInterface'
-        tags:
-            - { name: 'long_running.cleaner' }
